@@ -85,7 +85,7 @@ export default function TermsPage() {
 
         <h2>9. Intellectual property</h2>
         <p>
-          PetTranslator.ai, the brand, the editorial design, and all original written content on this site are owned by Khabir Neelum / PetTranslator.ai. The AI inference engine is Anthropic Claude under license. You may quote articles from this site with attribution and a link.
+          PetTranslator.ai, the brand, the editorial design, and all original written content on this site are owned by Khabir Mughal / PetTranslator.ai. The AI inference engine is Anthropic Claude under license. You may quote articles from this site with attribution and a link.
         </p>
 
         <h2>10. Liability</h2>
@@ -105,7 +105,7 @@ export default function TermsPage() {
 
         <h2>13. Contact</h2>
         <p>
-          Operated by Khabir Neelum, founder.
+          Operated by Khabir Mughal, founder.
           <br />
           General contact:{" "}
           <a href="mailto:hello@pettranslator.ai" className="text-terra hover:underline">

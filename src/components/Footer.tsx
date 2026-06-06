@@ -36,7 +36,7 @@ export function Footer() {
         <div>
           <p className="label mb-3">Company</p>
           <ul className="space-y-1.5 text-slate">
-            <li><Link href="/blog/author/khabir-neelum" className="hover:text-terra">About the founder</Link></li>
+            <li><Link href="/blog/author/khabir-mughal" className="hover:text-terra">About the founder</Link></li>
             <li><a href="mailto:hello@pettranslator.ai" className="hover:text-terra">hello@pettranslator.ai</a></li>
             <li><Link href="/refund-policy" className="hover:text-terra">Refund policy</Link></li>
             <li><Link href="/terms" className="hover:text-terra">Terms</Link></li>
@@ -47,7 +47,7 @@ export function Footer() {
       <div className="border-t border-rule">
         <div className="mx-auto max-w-6xl px-6 py-4 text-xs font-mono text-slate-soft flex flex-wrap justify-between gap-2">
           <p>© {new Date().getFullYear()} PetTranslator.ai</p>
-          <p>AVSAB-aligned · Force-free · Built solo by Khabir Neelum</p>
+          <p>AVSAB-aligned · Force-free · Built solo by Khabir Mughal</p>
         </div>
       </div>
     </footer>

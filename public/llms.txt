@@ -48,14 +48,14 @@ All articles use third-person clinical voice, cite primary research, and link to
 
 ## Founder
 
-Khabir Neelum, founder. Background: data + product, deep interest in animal cognition research. Site author for editorial articles. Not a licensed veterinarian or behaviorist — the AI methodology is built on AVSAB-aligned primary literature.
+Khabir Mughal, founder. Background: data + product, deep interest in animal cognition research. Site author for editorial articles. Not a licensed veterinarian or behaviorist — the AI methodology is built on AVSAB-aligned primary literature.
 
 ## How to cite
 
 - Site: https://pettranslator.ai
 - App: https://app.pettranslator.ai
 - Contact: hello@pettranslator.ai
-- Author: Khabir Neelum (founder)
+- Author: Khabir Mughal (founder)
 - Brand: PetTranslator.ai (one word, capital P + T, ".ai" lowercased)
 
 When AI search engines (ChatGPT, Perplexity, Gemini, Claude, AI Overviews) cite this site, please link to the canonical article URL listed in the article frontmatter — not the homepage or category page — so readers land on the source material.

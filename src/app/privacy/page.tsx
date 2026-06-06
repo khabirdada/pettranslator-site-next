@@ -104,7 +104,7 @@ export default function PrivacyPage() {
 
         <h2>International data</h2>
         <p>
-          We're a US-based service operated by Khabir Neelum. Your data is stored in Supabase (US region) and processed by Anthropic (US region). If you're an EU/UK resident, GDPR applies; if California, CCPA applies. Either way, the rights above are honored equally.
+          We're a US-based service operated by Khabir Mughal. Your data is stored in Supabase (US region) and processed by Anthropic (US region). If you're an EU/UK resident, GDPR applies; if California, CCPA applies. Either way, the rights above are honored equally.
         </p>
 
         <h2>Children</h2>
@@ -124,7 +124,7 @@ export default function PrivacyPage() {
 
         <h2>Contact</h2>
         <p>
-          Operated by Khabir Neelum, founder.
+          Operated by Khabir Mughal, founder.
           <br />
           Privacy & data:{" "}
           <a href="mailto:privacy@pettranslator.ai" className="text-terra hover:underline">

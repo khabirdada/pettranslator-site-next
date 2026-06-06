@@ -70,7 +70,7 @@ export default function HomePage() {
           <p className="font-serif text-2xl sm:text-3xl leading-snug text-ink">
             Most "pet translator" apps are entertainment products — cartoon translations that monetize through weekly-trial rugpulls. We built the opposite: a clinical instrument that <em className="text-terra">documents what it sees</em> in your pet's body language, weighs the context you provide, and returns the kind of analysis a board-certified behaviorist would write in a session note.
           </p>
-          <p className="label mt-6">— Khabir Neelum, founder · {new Date().getFullYear()}</p>
+          <p className="label mt-6">— Khabir Mughal, founder · {new Date().getFullYear()}</p>
         </div>
       </section>
 

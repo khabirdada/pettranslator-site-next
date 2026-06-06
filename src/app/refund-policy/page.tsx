@@ -87,7 +87,7 @@ export default function RefundPolicyPage() {
 
         <h2>Contact</h2>
         <p>
-          PetTranslator.ai — operated by Khabir Neelum, founder.
+          PetTranslator.ai — operated by Khabir Mughal, founder.
           <br />
           Refunds & billing:{" "}
           <a href="mailto:refund@pettranslator.ai" className="text-terra hover:underline">
