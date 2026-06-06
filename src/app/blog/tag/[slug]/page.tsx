@@ -28,7 +28,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const tag = getTag(slug);
   if (!tag) return {};
   return {
-    title: tag.seo_title,
+    // `absolute` bypasses the root layout's `%s | PetTranslator.ai` template —
+    // tag seo_title already ends with "| PetTranslator.ai" in MDX.
+    title: { absolute: tag.seo_title },
     description: tag.meta_description,
     alternates: { canonical: `/blog/tag/${slug}` },
   };

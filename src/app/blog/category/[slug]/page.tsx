@@ -21,7 +21,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const cat = getCategory(slug);
   if (!cat) return {};
   return {
-    title: cat.seo_title,
+    // `absolute` bypasses the root layout's `%s | PetTranslator.ai` template —
+    // category seo_title already ends with "| PetTranslator.ai" in MDX.
+    title: { absolute: cat.seo_title },
     description: cat.meta_description,
     alternates: { canonical: `/blog/category/${slug}` },
   };
