@@ -1,7 +1,16 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAllPosts, getPost, getPostSlugs, getAuthor, getCategory } from "@/lib/content";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import {
+  getAllPosts,
+  getPost,
+  getPostBody,
+  getPostSlugs,
+  getAuthor,
+  getCategory,
+} from "@/lib/content";
+import { mdxComponents } from "@/components/mdx-components";
 
 // Pre-render all article URLs at build time (static export).
 export async function generateStaticParams() {
@@ -41,9 +50,12 @@ export default async function ArticlePage({ params }: PageProps) {
   const post = getPost(slug);
   if (!post) notFound();
 
-  // Dynamic import of the MDX content. Webpack statically analyzes the
-  // template literal and bundles every matching .mdx file in src/content/posts/.
-  const { default: Content } = await import(`@/content/posts/${slug}.mdx`);
+  // Read the raw MDX body (frontmatter stripped by gray-matter) and render
+  // it via next-mdx-remote/rsc. This sidesteps Turbopack's inability to
+  // serialize remark-frontmatter as a loader plugin — instead, we compile
+  // the MDX on the server at build time from a string we control.
+  const body = getPostBody(slug);
+  if (!body) notFound();
 
   const author = getAuthor(post.author);
   const category = getCategory(post.category);
@@ -163,9 +175,11 @@ export default async function ArticlePage({ params }: PageProps) {
           </div>
         </header>
 
-        {/* The MDX body — picks up TryItCTA, Callout via mdx-components.tsx */}
+        {/* The MDX body — compiled at build time from the gray-matter-
+            stripped body string. Custom components (Callout, TryItCTA)
+            wired via the components prop. */}
         <article className="prose-editorial">
-          <Content />
+          <MDXRemote source={body} components={mdxComponents} />
         </article>
 
         {/* Tags */}

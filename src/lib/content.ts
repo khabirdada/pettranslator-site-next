@@ -96,6 +96,17 @@ export function getPost(slug: string): PostMeta | null {
   return getAllPosts().find((p) => p.slug === slug) ?? null;
 }
 
+/**
+ * Returns the raw markdown body of a post — frontmatter stripped by
+ * gray-matter. Pass this string to <MDXRemote source={...} /> for rendering.
+ */
+export function getPostBody(slug: string): string | null {
+  const filepath = path.join(POSTS_DIR, `${slug}.mdx`);
+  if (!fs.existsSync(filepath)) return null;
+  const raw = fs.readFileSync(filepath, "utf-8");
+  return matter(raw).content;
+}
+
 export function getPostSlugs(): string[] {
   return getAllPosts().map((p) => p.slug);
 }
