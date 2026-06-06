@@ -26,6 +26,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = getPost(slug);
   if (!post) return {};
   const url = `https://pettranslator.ai/blog/${slug}`;
+  const author = getAuthor(post.author);
+  // Hero images haven't been generated yet — frontmatter declares the
+  // target path but the file doesn't exist in /public. To avoid
+  // broken share-card thumbnails, only emit a hero og:image when the
+  // file is real. The root layout's /og.png is the fallback.
+  const heroExists = await heroImageExists(post.heroImage);
   return {
     title: post.title,
     description: post.description,
@@ -37,12 +43,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
-      authors: [post.author],
+      // Use the author's human-readable name (not the slug) so AI search
+      // engines, RSS readers, and OG-card consumers attribute correctly.
+      authors: [author?.name ?? post.author],
       tags: post.tags,
-      images: post.heroImage ? [{ url: post.heroImage, alt: post.heroAlt }] : undefined,
+      ...(heroExists
+        ? { images: [{ url: post.heroImage, alt: post.heroAlt }] }
+        : {}),
     },
     twitter: { card: "summary_large_image" },
   };
+}
+
+// Filesystem check for hero image. Only runs at build time on the server.
+async function heroImageExists(heroPath: string): Promise<boolean> {
+  if (!heroPath) return false;
+  try {
+    const fs = await import("node:fs");
+    const path = await import("node:path");
+    const abs = path.join(process.cwd(), "public", heroPath.replace(/^\//, ""));
+    return fs.existsSync(abs);
+  } catch {
+    return false;
+  }
 }
 
 export default async function ArticlePage({ params }: PageProps) {
@@ -91,9 +114,10 @@ export default async function ArticlePage({ params }: PageProps) {
                     }
                   : undefined,
                 publisher: { "@id": "https://pettranslator.ai/#organization" },
-                image: post.heroImage
-                  ? `https://pettranslator.ai${post.heroImage}`
-                  : undefined,
+                // Article schema image — Google prefers a real URL.
+                // Fall back to the sitewide /og.png so this never points
+                // at a 404 during the period before hero images ship.
+                image: "https://pettranslator.ai/og.png",
                 mainEntityOfPage: url,
                 articleSection: category?.name,
                 keywords: post.tags.join(", "),

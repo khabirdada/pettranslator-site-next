@@ -20,53 +20,107 @@ export default function BlogHubPage() {
   const pillars = posts.filter((p) => isPillar(p.slug));
   const rest = posts.filter((p) => !isPillar(p.slug));
 
+  // Blog schema gives Google + AI search engines a structured graph of
+  // every article on the hub — improves indexing and AI-citation odds.
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": "https://pettranslator.ai/blog#blog",
+    name: "PetTranslator.ai — Behavior Notes",
+    description:
+      "Behaviorist-grade guides to dog and cat body language, stress signals, and training science.",
+    url: "https://pettranslator.ai/blog",
+    publisher: { "@id": "https://pettranslator.ai/#organization" },
+    blogPost: posts.slice(0, 30).map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      description: p.description,
+      url: `https://pettranslator.ai/blog/${p.slug}`,
+      datePublished: p.publishedAt,
+      dateModified: p.updatedAt,
+    })),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://pettranslator.ai/" },
+      { "@type": "ListItem", position: 2, name: "Blog", item: "https://pettranslator.ai/blog" },
+    ],
+  };
+
   return (
-    <main className="mx-auto max-w-5xl px-6 py-12 sm:py-20">
-      <p className="label mb-3">§ Blog</p>
-      <h1 className="mb-4">
-        Behavior <em className="text-terra">notes</em>.
-      </h1>
-      <p className="text-slate max-w-prose text-lg leading-relaxed mb-12">
-        Behaviorist-grade guides to dog and cat body language, stress signals,
-        and the science behind what your pet is actually communicating. Every
-        article cites primary sources. No dominance theory.
-      </p>
+    <>
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
-      {/* Category nav strip */}
-      <nav className="flex flex-wrap gap-3 mb-12">
-        {categories.map((cat) => (
-          <Link
-            key={cat.slug}
-            href={`/blog/category/${cat.slug}`}
-            className="inline-flex items-center gap-2 border border-rule rounded-full px-4 py-2 text-sm hover:border-terra hover:text-terra transition"
-          >
-            {cat.name}
-          </Link>
-        ))}
-      </nav>
+      <main className="mx-auto max-w-5xl px-6 py-12 sm:py-20">
+        <nav className="label mb-4 flex gap-2 text-slate-soft">
+          <Link href="/" className="hover:text-terra">Home</Link>
+          <span>/</span>
+          <span>Blog</span>
+        </nav>
 
-      {/* Pillars — top billing */}
-      {pillars.length > 0 && (
-        <section className="mb-16">
-          <p className="label mb-5">Foundation guides</p>
-          <div className="grid sm:grid-cols-3 gap-6">
-            {pillars.map((post) => (
-              <ArticleCard key={post.slug} post={post} variant="pillar" />
+        <p className="label mb-3">§ Blog</p>
+        <h1 className="mb-4">
+          Behavior <em className="text-terra">notes</em>.
+        </h1>
+        <p className="text-slate max-w-prose text-lg leading-relaxed mb-12">
+          Behaviorist-grade guides to dog and cat body language, stress signals,
+          and the science behind what your pet is actually communicating. Every
+          article cites primary sources. No dominance theory.
+        </p>
+
+        {/* Category nav strip */}
+        <nav className="flex flex-wrap gap-3 mb-12" aria-label="Categories">
+          {categories.map((cat) => (
+            <Link
+              key={cat.slug}
+              href={`/blog/category/${cat.slug}`}
+              className="inline-flex items-center gap-2 border border-rule rounded-full px-4 py-2 text-sm hover:border-terra hover:text-terra transition"
+            >
+              {cat.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Pillars — top billing. h2 promotes section in document outline
+            for screen readers + search engines (was a styled <p> before). */}
+        {pillars.length > 0 && (
+          <section className="mb-16">
+            <h2 className="label mb-5 font-mono normal-case tracking-wider text-slate-soft">
+              Foundation guides
+            </h2>
+            <div className="grid sm:grid-cols-3 gap-6">
+              {pillars.map((post) => (
+                <ArticleCard key={post.slug} post={post} variant="pillar" />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* All other articles */}
+        <section>
+          <h2 className="label mb-5 font-mono normal-case tracking-wider text-slate-soft">
+            All articles ({rest.length})
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+            {rest.map((post) => (
+              <ArticleCard key={post.slug} post={post} variant="cluster" />
             ))}
           </div>
         </section>
-      )}
-
-      {/* All other articles */}
-      <section>
-        <p className="label mb-5">All articles ({rest.length})</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
-          {rest.map((post) => (
-            <ArticleCard key={post.slug} post={post} variant="cluster" />
-          ))}
-        </div>
-      </section>
-    </main>
+      </main>
+    </>
   );
 }
 

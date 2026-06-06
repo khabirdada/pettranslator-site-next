@@ -14,11 +14,16 @@ const BASE = "https://pettranslator.ai";
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  // Static high-priority pages
+  // Static high-priority pages. Legal pages are low priority but
+  // must be present in the sitemap so Stripe/PayPal merchant review
+  // and Google's legal-doc-aware ranking signals find them.
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${BASE}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${BASE}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE}/blog`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
+    { url: `${BASE}/refund-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${BASE}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${BASE}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   // Articles

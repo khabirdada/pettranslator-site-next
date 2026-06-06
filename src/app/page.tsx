@@ -7,6 +7,14 @@
 // separate <MotionLayer /> client component in v1.1 if real-world data
 // shows the static version converts poorly.
 import Link from "next/link";
+import type { Metadata } from "next";
+
+// Homepage gets its own explicit canonical — the root layout sets
+// `metadataBase` but Next.js doesn't auto-emit a canonical for the
+// homepage unless we declare it here.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   return (
@@ -16,8 +24,12 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24 grid lg:grid-cols-[1.6fr_1fr] gap-12">
           <div>
             <p className="label mb-4">A scientific instrument for pet owners</p>
+            {/* Whitespace between <em> and <span> matters for SEO/a11y:
+                <br> inserts a visual line break but no text whitespace, so
+                `textContent` and screen readers would read "actuallytrying"
+                if we don't include an explicit space. */}
             <h1 className="mb-6">
-              Know what your pet is <em>actually</em>
+              Know what your pet is <em>actually</em>{" "}
               <br />
               <span className="text-terra">trying to say.</span>
             </h1>

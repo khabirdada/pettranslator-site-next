@@ -41,23 +41,58 @@ export default async function TagPage({ params }: PageProps) {
   const tag = getTag(slug);
   if (!tag) notFound();
   const posts = getPostsByTag(slug);
+  const url = `https://pettranslator.ai/blog/tag/${slug}`;
 
   return (
     <>
       <script
         type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            name: tag.name,
-            description: tag.meta_description,
-            url: `https://pettranslator.ai/blog/tag/${slug}`,
+            "@graph": [
+              {
+                "@type": "CollectionPage",
+                "@id": `${url}#collection`,
+                name: tag.name,
+                description: tag.meta_description,
+                url,
+                isPartOf: { "@id": "https://pettranslator.ai/blog#blog" },
+                publisher: { "@id": "https://pettranslator.ai/#organization" },
+                mainEntity: {
+                  "@type": "ItemList",
+                  numberOfItems: posts.length,
+                  itemListElement: posts.slice(0, 30).map((p, i) => ({
+                    "@type": "ListItem",
+                    position: i + 1,
+                    url: `https://pettranslator.ai/blog/${p.slug}`,
+                    name: p.title,
+                  })),
+                },
+              },
+              {
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://pettranslator.ai/" },
+                  { "@type": "ListItem", position: 2, name: "Blog", item: "https://pettranslator.ai/blog" },
+                  { "@type": "ListItem", position: 3, name: tag.name },
+                ],
+              },
+            ],
           }),
         }}
       />
 
       <main className="mx-auto max-w-5xl px-6 py-12 sm:py-20">
+        <nav className="label mb-4 flex gap-2 text-slate-soft" aria-label="Breadcrumb">
+          <Link href="/" className="hover:text-terra">Home</Link>
+          <span>/</span>
+          <Link href="/blog" className="hover:text-terra">Blog</Link>
+          <span>/</span>
+          <span className="text-slate">{tag.name}</span>
+        </nav>
+
         <p className="label mb-3">§ Tag</p>
         <h1 className="mb-6">{tag.name}</h1>
 
@@ -72,7 +107,9 @@ export default async function TagPage({ params }: PageProps) {
             ))}
         </ClampDescription>
 
-        <p className="label mb-5">{posts.length} {posts.length === 1 ? "article" : "articles"}</p>
+        <h2 className="label mb-5 font-mono normal-case tracking-wider text-slate-soft">
+          {posts.length} {posts.length === 1 ? "article" : "articles"}
+        </h2>
 
         <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
           {posts.map((post) => (

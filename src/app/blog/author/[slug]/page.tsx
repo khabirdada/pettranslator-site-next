@@ -15,9 +15,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const author = getAuthor(slug);
   if (!author) return {};
+  // role like "Founder, PetTranslator.ai" already contains the brand —
+  // strip duplicate brand mentions from the description so it doesn't
+  // read "Founder, PetTranslator.ai of PetTranslator.ai".
+  const cleanRole = author.role.replace(/,?\s*PetTranslator\.ai\s*$/i, "").trim();
+  const descRole = cleanRole || author.role;
   return {
-    title: `${author.name} — ${author.role}`,
-    description: `Behavioral content by ${author.name}, ${author.role} of PetTranslator.ai.`,
+    // `absolute` bypasses the root layout's `%s | PetTranslator.ai` template
+    // because we want full control of the author title format.
+    title: { absolute: `${author.name} — ${author.role} | PetTranslator.ai` },
+    description: `Behaviorist-grade pet behavior writing by ${author.name}, ${descRole} at PetTranslator.ai. ${author.body.split(/\.\s+/)[0]}.`,
     alternates: { canonical: `/blog/author/${slug}` },
   };
 }

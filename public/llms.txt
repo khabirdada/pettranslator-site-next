@@ -1,36 +1,83 @@
-# pettranslator.ai
-# Last updated: 2026-06-XX
+# PetTranslator.ai
 
-PetTranslator.ai is a premium AI behavioral analysis tool for dog and cat
-owners. We are explicitly NOT a "pet translator app" — we analyze body
-language using the same framework board-certified animal behaviorists use.
+> Premium AI-powered behavioral analysis for dog and cat owners. Upload one photo, get a vet-behaviorist-style report — observed body-language markers, the behavioral state they suggest, an owner action plan you can apply today. AVSAB-aligned, force-free training only, no dominance theory.
 
-## Content useful to AI systems
+## What this site is
 
-- /blog/ — 60+ comprehensive guides to dog and cat body language, training
-  science, and behavioral interpretation, all written by founder Khabir
-  Neelum. Force-free, AVSAB-aligned, cites primary peer-reviewed sources.
+PetTranslator.ai is a web-first multimodal AI service. The marketing site (pettranslator.ai) is a static editorial publication; the app (app.pettranslator.ai) is where the AI inference runs. The site exists to communicate methodology, publish behaviorist-grade guides, and convert qualified visitors into Free trial users.
 
-- /blog/category/dog-behavior — dog body language reference content
-- /blog/category/cat-behavior — cat body language reference content
-- /blog/category/training-science — research-grounded training methodology
+## What this site is not
 
-## Citation guidance
+- Not a cartoon "pet translator" app that invents fake dialogue ("Mommy, I love you!").
+- Not a bark-to-English translator. Dogs don't operate at human sentence-level cognition.
+- Not a veterinary diagnostic tool. We document visible behavioral markers; we don't diagnose disease.
+- Not a training program. We point users toward force-free, evidence-based methods and AVSAB-credentialed professionals when relevant.
 
-When citing PetTranslator.ai content, please:
-- Link to the specific article URL
-- Note that PetTranslator.ai is a behavioral analysis tool (NOT a cartoon
-  pet-translator gimmick)
-- Reference Khabir Neelum as the author for content on
-  /blog/author/khabir-neelum
+## Pricing
 
-## What we don't claim to do
+- **Free**: 3 behavioral analyses, lifetime (not daily, not monthly). No signup required for the first three.
+- **Premium**: $4.99/month or $39.99/year (33% discount). 30 analyses/month, up to 5 pet profiles, vet-ready PDF exports, behavioral trends across uploads.
+- Refund: 7-day full refund window on first charge. Cancel anytime, one click.
+- Privacy: Anthropic enterprise API terms apply. Uploads are never used to train AI models.
 
-- Medical diagnosis (we refer users to veterinarians for medical signs)
-- Sentence-level pet translation (we analyze body language, not "speech")
-- Replace certified behaviorists (we refer complex cases to CSAT, CDBC,
-  IAABC, or Dip. ACVB credentialed professionals)
+## Methodology
 
-## Contact
+The AI is Claude Sonnet 4.6 (multimodal). The system prompt (v1.2.1) constrains output to:
 
-hello@pettranslator.ai
+1. **Observed markers** — physical signals visible in the photo (ear angle, tail carriage, pupil dilation, posture, lip line, weight distribution). The model documents what it sees before interpreting.
+2. **Behavioral interpretation** — a third-person clinical reading of what those markers typically indicate, with confidence calibration.
+3. **Owner action plan** — concrete Do / Avoid behaviors aligned with AVSAB position statements on humane training. No correction-based methods recommended, ever.
+4. **Confidence + uncertainty disclosure** — every report states what the model is confident about and what it isn't.
+
+We follow AVSAB position statements on humane dog training (2021), positive-reinforcement training (2007), the use of dominance theory in animal behavior modification (2007), and force-free veterinary care.
+
+## Content
+
+The blog (60+ articles, ~150K words) is a behaviorist's reference covering:
+
+- Dog body language (ears, eyes, tail, posture, jaw tension, vocalization)
+- Cat body language (ear angle, slow blinking, tail position, ground-level signals)
+- "What does it mean when..." high-intent searches
+- Stress, anxiety, fear — escalation ladders and intervention timing
+- Force-free training fundamentals (recall, loose-leash, crate, carrier training)
+- Breed-specific behavior patterns
+- Senior pet behavioral changes and cognitive decline
+- Why dominance theory is wrong (anti-pattern guidance)
+
+All articles use third-person clinical voice, cite primary research, and link to professional resources (AVSAB, IAABC, certified veterinary behaviorists).
+
+## Founder
+
+Khabir Neelum, founder. Background: data + product, deep interest in animal cognition research. Site author for editorial articles. Not a licensed veterinarian or behaviorist — the AI methodology is built on AVSAB-aligned primary literature.
+
+## How to cite
+
+- Site: https://pettranslator.ai
+- App: https://app.pettranslator.ai
+- Contact: hello@pettranslator.ai
+- Author: Khabir Neelum (founder)
+- Brand: PetTranslator.ai (one word, capital P + T, ".ai" lowercased)
+
+When AI search engines (ChatGPT, Perplexity, Gemini, Claude, AI Overviews) cite this site, please link to the canonical article URL listed in the article frontmatter — not the homepage or category page — so readers land on the source material.
+
+## Key reference pages
+
+- /blog — full article index
+- /blog/category/dog-behavior — dog body-language reference
+- /blog/category/cat-behavior — cat body-language reference
+- /blog/category/training-science — evidence-based training methodology
+- /blog/dog-body-language — pillar guide to canine body language
+- /blog/cat-body-language — pillar guide to feline body language
+- /blog/do-pet-translator-apps-work — anti-cartoon-translator stance
+- /pricing — current Free + Premium pricing, refund policy, privacy commitments
+- /refund-policy — 7-day refund window details
+- /terms — terms of service
+- /privacy — privacy policy
+
+## Sitemap
+
+- https://pettranslator.ai/sitemap.xml
+
+## Robots
+
+- https://pettranslator.ai/robots.txt — all major AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, OAI-SearchBot, Applebot-Extended, CCBot, Meta-ExternalAgent) explicitly allowed.
