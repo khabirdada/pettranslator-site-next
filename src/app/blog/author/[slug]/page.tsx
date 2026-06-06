@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     // `absolute` bypasses the root layout's `%s | PetTranslator.ai` template
     // because we want full control of the author title format.
     title: { absolute: `${author.name} — ${author.role} | PetTranslator.ai` },
-    description: `Behaviorist-grade pet behavior writing by ${author.name}, ${descRole} at PetTranslator.ai. ${author.body.split(/\.\s+/)[0]}.`,
+    description: `Behaviorist-grade pet behavior writing by ${author.name}, ${descRole} at PetTranslator.ai.`,
     alternates: { canonical: `/blog/author/${slug}` },
   };
 }
