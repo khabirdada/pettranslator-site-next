@@ -1,6 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getAllPosts, getAllCategories, heroImageExists } from "@/lib/content";
+import {
+  getAllPosts,
+  getAllCategories,
+  heroImageExists,
+  heroCardSrc,
+} from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Blog — Pet Behavior, Body Language, and Training Science",
@@ -144,10 +149,14 @@ function ArticleCard({
         {/* Real hero if the WebP exists on disk at build time; placeholder
             otherwise (article shipped before its Midjourney hero landed). */}
         {heroImageExists(post.heroImage) ? (
-          // Static export → can't use next/image; plain <img> keeps it CDN-served.
+          // srcset gives the browser the small 600w card for mobile/retina
+          // and the full 1376w only when a really wide grid demands it.
+          // Static export → plain <img>, served from Vercel's CDN.
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={post.heroImage}
+            src={heroCardSrc(post.heroImage) ?? post.heroImage}
+            srcSet={`${heroCardSrc(post.heroImage) ?? post.heroImage} 600w, ${post.heroImage} 1376w`}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             alt={post.heroAlt}
             width={1376}
             height={768}

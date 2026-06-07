@@ -79,8 +79,23 @@ export default async function ArticlePage({ params }: PageProps) {
 
   const url = `https://pettranslator.ai/blog/${slug}`;
 
+  const heroLive = heroImageExists(post.heroImage);
+
   return (
     <>
+      {/* LCP preload — pull the article hero down in parallel with the
+          HTML/CSS instead of waiting for body parsing. Shaves ~100–300ms
+          off Largest Contentful Paint when the hero is the LCP element. */}
+      {heroLive && (
+        <link
+          rel="preload"
+          as="image"
+          href={post.heroImage}
+          type="image/webp"
+          fetchPriority="high"
+        />
+      )}
+
       {/* Article + BreadcrumbList JSON-LD per page */}
       <script
         type="application/ld+json"
@@ -175,7 +190,7 @@ export default async function ArticlePage({ params }: PageProps) {
               has shipped. Width = container max-w-3xl (~768px) so the
               browser only needs the resized variant; the source is already
               within budget at 1376px. */}
-          {heroImageExists(post.heroImage) && (
+          {heroLive && (
             <figure className="-mx-6 sm:mx-0 sm:rounded-3xl overflow-hidden mb-8">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img

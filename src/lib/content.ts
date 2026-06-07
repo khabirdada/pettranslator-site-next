@@ -104,6 +104,24 @@ export function heroImageExists(heroPath: string | undefined): boolean {
   return fs.existsSync(abs);
 }
 
+/**
+ * Returns the small-card variant path for a hero image when one exists
+ * on disk (e.g. /blog/heroes/dog.webp → /blog/heroes/dog-card.webp).
+ * Cards on the blog/category/tag grids display at ~430px wide — serving
+ * the 1376px hero there wastes ~70% of every byte on mobile. We
+ * pre-generate a 600w variant once at build time.
+ *
+ * Falls back to the hero path if no card variant exists, so old posts
+ * without a card variant just serve the hero unchanged.
+ */
+export function heroCardSrc(heroPath: string | undefined): string | null {
+  if (!heroPath) return null;
+  const cardPath = heroPath.replace(/(\.[a-z0-9]+)$/i, "-card$1");
+  const abs = path.join(ROOT, "public", cardPath.replace(/^\//, ""));
+  if (fs.existsSync(abs)) return cardPath;
+  return heroPath;
+}
+
 export function getPost(slug: string): PostMeta | null {
   return getAllPosts().find((p) => p.slug === slug) ?? null;
 }

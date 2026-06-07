@@ -6,6 +6,7 @@ import {
   getCategory,
   getPostsByCategory,
   heroImageExists,
+  heroCardSrc,
 } from "@/lib/content";
 import { ClampDescription } from "@/components/blog/ClampDescription";
 
@@ -116,7 +117,9 @@ export default async function CategoryPage({ params }: PageProps) {
                   {heroImageExists(post.heroImage) ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={post.heroImage}
+                      src={heroCardSrc(post.heroImage) ?? post.heroImage}
+                      srcSet={`${heroCardSrc(post.heroImage) ?? post.heroImage} 600w, ${post.heroImage} 1376w`}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       alt={post.heroAlt}
                       width={1376}
                       height={768}
