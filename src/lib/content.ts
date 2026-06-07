@@ -92,6 +92,18 @@ export function getAllPosts(): PostMeta[] {
   return posts;
 }
 
+/**
+ * Build-time check — does the hero image file actually exist in /public?
+ * Posts whose frontmatter declares a heroImage but whose file hasn't
+ * been generated yet (Midjourney pending) return false here and the
+ * listing/article components show a placeholder instead of a broken img.
+ */
+export function heroImageExists(heroPath: string | undefined): boolean {
+  if (!heroPath) return false;
+  const abs = path.join(ROOT, "public", heroPath.replace(/^\//, ""));
+  return fs.existsSync(abs);
+}
+
 export function getPost(slug: string): PostMeta | null {
   return getAllPosts().find((p) => p.slug === slug) ?? null;
 }

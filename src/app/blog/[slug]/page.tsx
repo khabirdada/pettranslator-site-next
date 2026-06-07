@@ -9,6 +9,7 @@ import {
   getPostSlugs,
   getAuthor,
   getCategory,
+  heroImageExists,
 } from "@/lib/content";
 import { mdxComponents } from "@/components/mdx-components";
 
@@ -27,11 +28,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!post) return {};
   const url = `https://pettranslator.ai/blog/${slug}`;
   const author = getAuthor(post.author);
-  // Hero images haven't been generated yet — frontmatter declares the
-  // target path but the file doesn't exist in /public. To avoid
-  // broken share-card thumbnails, only emit a hero og:image when the
-  // file is real. The root layout's /og.png is the fallback.
-  const heroExists = await heroImageExists(post.heroImage);
+  // Hero images haven't been generated for every article yet —
+  // frontmatter declares the target path but the file may not exist
+  // in /public. To avoid broken share-card thumbnails, only emit a
+  // hero og:image when the file is real. The root layout's /og.png
+  // is the fallback for everything else.
+  const heroExists = heroImageExists(post.heroImage);
   return {
     title: post.title,
     description: post.description,
@@ -53,19 +55,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: { card: "summary_large_image" },
   };
-}
-
-// Filesystem check for hero image. Only runs at build time on the server.
-async function heroImageExists(heroPath: string): Promise<boolean> {
-  if (!heroPath) return false;
-  try {
-    const fs = await import("node:fs");
-    const path = await import("node:path");
-    const abs = path.join(process.cwd(), "public", heroPath.replace(/^\//, ""));
-    return fs.existsSync(abs);
-  } catch {
-    return false;
-  }
 }
 
 export default async function ArticlePage({ params }: PageProps) {
@@ -114,10 +103,13 @@ export default async function ArticlePage({ params }: PageProps) {
                     }
                   : undefined,
                 publisher: { "@id": "https://pettranslator.ai/#organization" },
-                // Article schema image — Google prefers a real URL.
-                // Fall back to the sitewide /og.png so this never points
-                // at a 404 during the period before hero images ship.
-                image: "https://pettranslator.ai/og.png",
+                // Article schema image — prefer the article's own hero
+                // when shipped; fall back to the sitewide /og.png so this
+                // never points at a 404 during the period before hero
+                // images ship.
+                image: heroImageExists(post.heroImage)
+                  ? `https://pettranslator.ai${post.heroImage}`
+                  : "https://pettranslator.ai/og.png",
                 mainEntityOfPage: url,
                 articleSection: category?.name,
                 keywords: post.tags.join(", "),
@@ -179,6 +171,25 @@ export default async function ArticlePage({ params }: PageProps) {
           <p className="text-slate text-lg leading-relaxed max-w-prose mb-6">
             {post.description}
           </p>
+          {/* Hero image rendered here, ABOVE the byline, when the file
+              has shipped. Width = container max-w-3xl (~768px) so the
+              browser only needs the resized variant; the source is already
+              within budget at 1376px. */}
+          {heroImageExists(post.heroImage) && (
+            <figure className="-mx-6 sm:mx-0 sm:rounded-3xl overflow-hidden mb-8">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={post.heroImage}
+                alt={post.heroAlt}
+                width={1376}
+                height={768}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="w-full h-auto"
+              />
+            </figure>
+          )}
           <div className="flex flex-wrap gap-x-5 gap-y-1 text-xs font-mono text-slate-soft">
             {author && (
               <Link

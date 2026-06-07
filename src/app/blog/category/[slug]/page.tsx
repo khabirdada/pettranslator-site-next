@@ -5,6 +5,7 @@ import {
   getAllCategories,
   getCategory,
   getPostsByCategory,
+  heroImageExists,
 } from "@/lib/content";
 import { ClampDescription } from "@/components/blog/ClampDescription";
 
@@ -111,8 +112,23 @@ export default async function CategoryPage({ params }: PageProps) {
           {posts.map((post) => (
             <li key={post.slug}>
               <Link href={`/blog/${post.slug}`} className="group block">
-                <div className="aspect-[16/10] rounded-2xl bg-paper-deep mb-4 flex items-center justify-center text-slate-soft text-xs font-mono">
-                  {post.heroImage ? "image" : "—"}
+                <div className="aspect-[16/10] rounded-2xl bg-paper-deep mb-4 overflow-hidden">
+                  {heroImageExists(post.heroImage) ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={post.heroImage}
+                      alt={post.heroAlt}
+                      width={1376}
+                      height={768}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-slate-soft text-xs font-mono">
+                      —
+                    </div>
+                  )}
                 </div>
                 <p className="label mb-1">{post.readingTime}</p>
                 <h3 className="font-serif text-lg leading-tight mb-2 group-hover:text-terra transition">

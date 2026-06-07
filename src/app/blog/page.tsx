@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getAllPosts, getAllCategories } from "@/lib/content";
+import { getAllPosts, getAllCategories, heroImageExists } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Blog — Pet Behavior, Body Language, and Training Science",
@@ -141,10 +141,25 @@ function ArticleCard({
           variant === "pillar" ? "ring-1 ring-terra/30" : ""
         }`}
       >
-        {/* Hero image placeholder — real images go in /public/blog/heroes/ */}
-        <div className="w-full h-full flex items-center justify-center text-slate-soft text-xs font-mono">
-          {post.heroImage ? "image" : "—"}
-        </div>
+        {/* Real hero if the WebP exists on disk at build time; placeholder
+            otherwise (article shipped before its Midjourney hero landed). */}
+        {heroImageExists(post.heroImage) ? (
+          // Static export → can't use next/image; plain <img> keeps it CDN-served.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={post.heroImage}
+            alt={post.heroAlt}
+            width={1376}
+            height={768}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-slate-soft text-xs font-mono">
+            —
+          </div>
+        )}
       </div>
       <p className="label mb-1">
         {post.category} · {post.readingTime}
