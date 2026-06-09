@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   // Base title trimmed to ≤41c so rendered SERP title stays ≤60c.
   title: "Pricing — Free, Premium, Pro",
   description:
-    "3 free behavioral analyses, lifetime. Premium $4.99/mo or $39.99/yr — 30 analyses/mo. Pro $9.99/mo — 75 analyses/mo, 15 pet profiles, vet-PDF.",
+    "3 free analyses. Premium $4.99/mo or $39.99/yr — 30/mo. Pro $9.99/mo or $79.99/yr — 75/mo, 15 pets, vet PDF, priority queue.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -82,6 +82,20 @@ const pricingSchema = {
             priceCurrency: "USD",
             billingDuration: "P1M",
             referenceQuantity: { "@type": "QuantitativeValue", value: 75, unitText: "analyses" },
+          },
+          availability: "https://schema.org/InStock",
+          url: "https://app.pettranslator.ai/pricing",
+        },
+        {
+          "@type": "Offer",
+          name: "Pro — Annual (33% off)",
+          price: "79.99",
+          priceCurrency: "USD",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: "79.99",
+            priceCurrency: "USD",
+            billingDuration: "P1Y",
           },
           availability: "https://schema.org/InStock",
           url: "https://app.pettranslator.ai/pricing",
@@ -259,7 +273,7 @@ export default function PricingPage() {
               <span className="text-slate text-sm font-mono">/ month</span>
             </div>
             <p className="text-xs text-slate-soft font-mono mb-6">
-              For breeders, multi-pet homes, fosters
+              or $79.99/year — 33% discount, $6.66/mo equivalent
             </p>
             <ul className="space-y-3 text-sm mb-8 flex-1">
               {[
@@ -282,7 +296,7 @@ export default function PricingPage() {
               Get Pro →
             </a>
             <p className="label mt-3 text-xs text-slate-soft">
-              Monthly billing · cancel anytime
+              Monthly or annual · cancel anytime
             </p>
           </div>
         </div>
@@ -343,7 +357,7 @@ export default function PricingPage() {
                   ["Vet-ready PDF export", "—", "—", "Yes"],
                   ["Priority analysis queue", "—", "—", "Yes"],
                   ["Daily safety ceiling", "—", "10 / day", "25 / day"],
-                  ["Billing", "—", "Monthly or Annual", "Monthly"],
+                  ["Billing", "—", "Monthly or Annual", "Monthly or Annual"],
                 ].map(([label, free, prem, pro]) => (
                   <tr key={label} className="border-b border-rule/50">
                     <td className="py-3">{label}</td>

@@ -66,7 +66,7 @@ export default function TermsPage() {
 
         <h2>6. Payment, refunds, cancellation</h2>
         <p>
-          Premium is billed monthly ($4.99) or annually ($39.99) via Stripe. Pro is billed monthly ($9.99) via Stripe. Full refund within 7 days of your first charge — see the{" "}
+          Premium is billed monthly ($4.99) or annually ($39.99). Pro is billed monthly ($9.99) or annually ($79.99). Both via Stripe. Full refund within 7 days of your first charge — see the{" "}
           <Link href="/refund-policy" className="text-terra hover:underline">
             Refund policy
           </Link>

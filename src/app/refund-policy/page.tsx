@@ -73,7 +73,7 @@ export default function RefundPolicyPage() {
 
         <h2>Pro plan</h2>
         <p>
-          The 7-day refund window applies to Pro ($9.99/mo) on the same terms as Premium. Pro is monthly-only — there's no annual variant to refund. After 7 days, the current month is non-refundable but you can cancel auto-renewal anytime.
+          The 7-day refund window applies to Pro ($9.99/mo or $79.99/yr) on the same terms as Premium. After 7 days, the current period is non-refundable but you can cancel auto-renewal anytime.
         </p>
 
         <h2>Disputes</h2>

@@ -17,7 +17,7 @@ PetTranslator.ai is a web-first multimodal AI service. The marketing site (pettr
 
 - **Free**: 3 behavioral analyses, lifetime (not daily, not monthly). 1 pet profile. No signup required for the first three.
 - **Premium**: $4.99/month OR $39.99/year (33% annual discount). 30 analyses/month, up to 5 pet profiles, behavioral trends, 30-day history.
-- **Pro**: $9.99/month (monthly only). 75 analyses/month, up to 15 pet profiles, everything in Premium plus priority analysis queue and vet-ready PDF exports. For breeders, multi-pet households, fosters.
+- **Pro**: $9.99/month OR $79.99/year (33% annual discount). 75 analyses/month, up to 15 pet profiles, everything in Premium plus priority analysis queue and vet-ready PDF exports. For breeders, multi-pet households, fosters.
 - All three tiers use the same Claude Sonnet 4.6 model — tiers differ in volume, never in reasoning quality.
 - Refund: 7-day full refund window on first charge. Cancel anytime, one click.
 - Privacy: Anthropic enterprise API terms apply. Uploads are never used to train AI models.
