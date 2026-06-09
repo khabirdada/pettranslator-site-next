@@ -273,7 +273,10 @@ export default function HomePage() {
 
       {/* CLOSING CTA */}
       <section>
-        <div className="mx-auto max-w-3xl px-6 py-20 sm:py-28 text-center">
+        {/* Closing CTA — previously py-20 sm:py-28 left ~180px of dead
+            space stacked on top of FAQ's bottom padding. Pulled in line
+            with the other interior sections (py-12 sm:py-16). */}
+        <div className="mx-auto max-w-3xl px-6 py-12 sm:py-16 text-center">
           <p className="label mb-3" style={{ color: "var(--terra)" }}>§ 07 · Try it</p>
           <h2 className="mb-6">
             Read your pet, <em className="text-terra">properly.</em>
