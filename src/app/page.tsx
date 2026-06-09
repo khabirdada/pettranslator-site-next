@@ -19,9 +19,12 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      {/* HERO */}
+      {/* HERO — tighter vertical rhythm. The previous py-16 sm:py-24 left
+          ~200px of dead space above the eyebrow on tall viewports. py-10
+          sm:py-14 keeps the editorial whitespace feel but lets the hero
+          headline land in the first scroll. */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-6xl px-6 py-16 sm:py-24 grid lg:grid-cols-[1.6fr_1fr] gap-12">
+        <div className="mx-auto max-w-6xl px-6 py-10 sm:py-14 grid lg:grid-cols-[1.6fr_1fr] gap-12">
           <div>
             <p className="label mb-4">A scientific instrument for pet owners</p>
             {/* Whitespace between <em> and <span> matters for SEO/a11y:
@@ -65,7 +68,7 @@ export default function HomePage() {
 
       {/* MANIFESTO */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-2xl px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-2xl px-6 py-12 sm:py-16">
           <p className="label mb-4">§ 01 · The premise</p>
           <p className="font-serif text-2xl sm:text-3xl leading-snug text-ink">
             Most "pet translator" apps are entertainment products — cartoon translations that monetize through weekly-trial rugpulls. We built the opposite: a clinical instrument that <em className="text-terra">documents what it sees</em> in your pet's body language, weighs the context you provide, and returns the kind of analysis a board-certified behaviorist would write in a session note.
@@ -76,7 +79,7 @@ export default function HomePage() {
 
       {/* THREE PRINCIPLES */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
           <p className="label mb-3">§ 02 · How we think about it</p>
           <h2 className="mb-12 max-w-2xl">
             Three principles, applied <em className="text-terra">strictly</em>.
@@ -111,7 +114,7 @@ export default function HomePage() {
 
       {/* SPECIMEN REPORT */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
           <p className="label mb-3">§ 03 · Specimen report</p>
           <h2 className="mb-3 max-w-2xl">
             This is what a <em className="text-terra">real</em> analysis looks like.
@@ -181,7 +184,7 @@ export default function HomePage() {
 
       {/* HOW IT WORKS */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
           <p className="label mb-3">§ 04 · The process</p>
           <h2 className="mb-12 max-w-2xl">
             Three chapters, about <em className="text-terra">ten seconds.</em>
@@ -216,7 +219,7 @@ export default function HomePage() {
 
       {/* PRICING */}
       <section id="pricing" className="border-b border-rule">
-        <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
           <p className="label mb-3">§ 05 · Subscription</p>
           <h2 className="mb-12 max-w-2xl">
             Simple pricing. <em className="text-terra">Cancel in one click.</em>
@@ -334,7 +337,7 @@ export default function HomePage() {
 
       {/* FAQ */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-3xl px-6 py-16 sm:py-20">
+        <div className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
           <p className="label mb-3">§ 06 · Common questions</p>
           <h2 className="mb-10">
             You're <em className="text-terra">right</em> to ask.
