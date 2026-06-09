@@ -69,7 +69,7 @@ export default function HomePage() {
 
       {/* MANIFESTO */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-2xl px-6 py-12 sm:py-16">
+        <div className="mx-auto max-w-2xl px-6 py-10 sm:py-12">
           <p className="label mb-4">§ 01 · The premise</p>
           <p className="font-serif text-2xl sm:text-3xl leading-snug text-ink">
             Most "pet translator" apps are entertainment products — cartoon translations that monetize through weekly-trial rugpulls. We built the opposite: a clinical instrument that <em className="text-terra">documents what it sees</em> in your pet's body language, weighs the context you provide, and returns the kind of analysis a board-certified behaviorist would write in a session note.
@@ -80,9 +80,9 @@ export default function HomePage() {
 
       {/* THREE PRINCIPLES */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl px-6 py-10 sm:py-12">
           <p className="label mb-3">§ 02 · How we think about it</p>
-          <h2 className="mb-12 max-w-2xl">
+          <h2 className="mb-8 max-w-2xl">
             Three principles, applied <em className="text-terra">strictly</em>.
           </h2>
           <div className="grid sm:grid-cols-3 gap-8">
@@ -115,12 +115,12 @@ export default function HomePage() {
 
       {/* SPECIMEN REPORT */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl px-6 py-10 sm:py-12">
           <p className="label mb-3">§ 03 · Specimen report</p>
           <h2 className="mb-3 max-w-2xl">
             This is what a <em className="text-terra">real</em> analysis looks like.
           </h2>
-          <p className="text-slate max-w-prose mb-10">
+          <p className="text-slate max-w-prose mb-6">
             Not "Woof! Feed me!" cartoons. Behavioral signals, mapped to recommendations you can act on today.
           </p>
 
@@ -185,9 +185,9 @@ export default function HomePage() {
 
       {/* HOW IT WORKS */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl px-6 py-10 sm:py-12">
           <p className="label mb-3">§ 04 · The process</p>
-          <h2 className="mb-12 max-w-2xl">
+          <h2 className="mb-8 max-w-2xl">
             Three chapters, about <em className="text-terra">ten seconds.</em>
           </h2>
           <div className="grid sm:grid-cols-3 gap-8">
@@ -227,9 +227,9 @@ export default function HomePage() {
 
       {/* FAQ */}
       <section className="border-b border-rule">
-        <div className="mx-auto max-w-3xl px-6 py-12 sm:py-16">
+        <div className="mx-auto max-w-3xl px-6 py-10 sm:py-12">
           <p className="label mb-3">§ 06 · Common questions</p>
-          <h2 className="mb-10">
+          <h2 className="mb-8">
             You're <em className="text-terra">right</em> to ask.
           </h2>
           <div className="divide-y divide-rule">
@@ -275,8 +275,8 @@ export default function HomePage() {
       <section>
         {/* Closing CTA — previously py-20 sm:py-28 left ~180px of dead
             space stacked on top of FAQ's bottom padding. Pulled in line
-            with the other interior sections (py-12 sm:py-16). */}
-        <div className="mx-auto max-w-3xl px-6 py-12 sm:py-16 text-center">
+            with the other interior sections (py-10 sm:py-12). */}
+        <div className="mx-auto max-w-3xl px-6 py-10 sm:py-12 text-center">
           <p className="label mb-3" style={{ color: "var(--terra)" }}>§ 07 · Try it</p>
           <h2 className="mb-6">
             Read your pet, <em className="text-terra">properly.</em>

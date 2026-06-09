@@ -186,12 +186,12 @@ export default function PricingPage() {
         <h1 className="mb-4">
           Read your pet, <em className="text-terra">properly</em>.
         </h1>
-        <p className="text-slate text-lg max-w-prose mb-12">
+        <p className="text-slate text-lg max-w-prose mb-8">
           Start free — 3 analyses with no signup. Upgrade to Premium for monthly
           consistency, or Pro for power-user volume across the whole household.
         </p>
 
-        <div className="grid sm:grid-cols-3 gap-6 mb-12">
+        <div className="grid sm:grid-cols-3 gap-6 mb-10">
           {/* FREE */}
           <div className="border border-rule rounded-3xl p-7 bg-paper-light flex flex-col">
             <h2 className="label mb-3 font-mono normal-case tracking-wider text-slate-soft">
@@ -302,7 +302,7 @@ export default function PricingPage() {
         </div>
 
         {/* The four-row trust strip — same FAQ surfaced via schema above */}
-        <section className="border-t border-rule pt-8 grid sm:grid-cols-2 gap-x-8 gap-y-6 text-sm mb-16">
+        <section className="border-t border-rule pt-8 grid sm:grid-cols-2 gap-x-8 gap-y-6 text-sm mb-12">
           <div>
             <h3 className="font-semibold mb-1">7-day refund window</h3>
             <p className="text-slate leading-relaxed">
@@ -330,7 +330,7 @@ export default function PricingPage() {
         </section>
 
         {/* COMPARISON TABLE */}
-        <section className="border-t border-rule pt-8 mb-16">
+        <section className="border-t border-rule pt-8 mb-12">
           <h2 className="label mb-5 font-mono normal-case tracking-wider text-slate-soft">
             What's actually different
           </h2>

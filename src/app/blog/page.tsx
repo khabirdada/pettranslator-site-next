@@ -82,7 +82,7 @@ export default function BlogHubPage() {
         <h1 className="mb-4">
           Behavior <em className="text-terra">notes</em>.
         </h1>
-        <p className="text-slate max-w-prose text-lg leading-relaxed mb-12">
+        <p className="text-slate max-w-prose text-lg leading-relaxed mb-8">
           Behaviorist-grade guides to dog and cat body language, stress signals,
           and the science behind what your pet is actually communicating. Every
           article cites primary sources. No dominance theory.
@@ -91,7 +91,7 @@ export default function BlogHubPage() {
         {/* Category nav strip. Hairline below it makes it visually a
             "browse-by-category" filter rather than letting it bleed into
             the curated 'Foundation guides' section that follows. */}
-        <nav className="flex flex-wrap gap-3 pb-10 mb-16 border-b border-rule" aria-label="Categories">
+        <nav className="flex flex-wrap gap-3 pb-8 mb-12 border-b border-rule" aria-label="Categories">
           {categories.map((cat) => (
             <Link
               key={cat.slug}
@@ -108,7 +108,7 @@ export default function BlogHubPage() {
             uppercase mono label so the eye reads it as a section break,
             not a sub-label of the filter pills above. */}
         {pillars.length > 0 && (
-          <section className="mb-16">
+          <section className="mb-12">
             <p className="label mb-2">§ Foundation guides</p>
             <h2 className="font-serif text-2xl sm:text-3xl mb-8">
               Start <em className="text-terra">here</em>.

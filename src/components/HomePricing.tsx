@@ -83,12 +83,12 @@ export function HomePricing() {
 
   return (
     <section id="pricing" className="border-b border-rule">
-      <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
+      <div className="mx-auto max-w-6xl px-6 py-10 sm:py-12">
         <p className="label mb-3">§ 05 · Subscription</p>
         <h2 className="mb-3 max-w-2xl">
           Simple pricing. <em className="text-terra">Cancel in one click.</em>
         </h2>
-        <p className="text-slate max-w-prose mb-10">
+        <p className="text-slate max-w-prose mb-6">
           Try it free — three full analyses, no signup. Upgrade only if you'd
           actually use it month after month.
         </p>
@@ -100,7 +100,7 @@ export function HomePricing() {
         <div
           role="tablist"
           aria-label="Billing interval"
-          className="inline-flex relative border border-rule rounded-full p-1 bg-paper-light mb-10"
+          className="inline-flex relative border border-rule rounded-full p-1 bg-paper-light mb-8"
         >
           {/* Sliding indicator behind the active tab */}
           <span
