@@ -179,3 +179,13 @@ em { font-style: italic; }
   -webkit-box-orient: unset;
   overflow: visible;
 }
+
+/* ---------- ANIMATIONS ----------
+   fadeIn used by the homepage pricing toggle so the price NUMBER visibly
+   "swaps" instead of changing in place. The wrapper element changes its
+   React key on every toggle flip, re-mounting it, which retriggers the
+   keyframe. Subtle (200ms) — premium feel without distraction. */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

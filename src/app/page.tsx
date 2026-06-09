@@ -8,6 +8,7 @@
 // shows the static version converts poorly.
 import Link from "next/link";
 import type { Metadata } from "next";
+import { HomePricing } from "@/components/HomePricing";
 
 // Homepage gets its own explicit canonical — the root layout sets
 // `metadataBase` but Next.js doesn't auto-emit a canonical for the
@@ -217,123 +218,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PRICING */}
-      <section id="pricing" className="border-b border-rule">
-        <div className="mx-auto max-w-6xl px-6 py-12 sm:py-16">
-          <p className="label mb-3">§ 05 · Subscription</p>
-          <h2 className="mb-12 max-w-2xl">
-            Simple pricing. <em className="text-terra">Cancel in one click.</em>
-          </h2>
-
-          <div className="space-y-4">
-            <div className="border border-rule rounded-2xl p-6 grid sm:grid-cols-[1fr_auto_2fr_auto] items-center gap-6">
-              <div>
-                <p className="font-serif text-lg">Free</p>
-                <p className="label">Forever</p>
-              </div>
-              <p className="font-serif text-2xl">$0</p>
-              <ul className="text-sm text-slate space-y-1">
-                <li>· 3 behavioral analyses (lifetime)</li>
-                <li>· Single pet profile, full report</li>
-                <li>· 30-day result history</li>
-              </ul>
-              <a
-                href="https://app.pettranslator.ai/login"
-                className="text-terra text-sm font-medium hover:underline"
-              >
-                Start with 3 free →
-              </a>
-            </div>
-
-            <div className="border-2 border-terra rounded-2xl p-6 grid sm:grid-cols-[1fr_auto_2fr_auto] items-center gap-6 bg-paper-light">
-              <div>
-                <p className="font-serif text-lg">
-                  <em className="text-terra">Premium</em>
-                </p>
-                <p className="label">Recommended</p>
-              </div>
-              <p className="font-serif text-2xl">
-                $4.99 <span className="text-base font-sans text-slate-soft">/ month</span>
-              </p>
-              <ul className="text-sm text-slate space-y-1">
-                <li>· 30 analyses per month</li>
-                <li>· Up to 5 pet profiles, vet-ready PDF export</li>
-                <li>· Behavioral trends, priority queue</li>
-              </ul>
-              <a
-                href="https://app.pettranslator.ai/pricing"
-                className="text-terra text-sm font-medium hover:underline"
-              >
-                Get Premium →
-              </a>
-            </div>
-
-            <div className="border border-rule rounded-2xl p-6 grid sm:grid-cols-[1fr_auto_2fr_auto] items-center gap-6">
-              <div>
-                <p className="font-serif text-lg">Annual</p>
-                <p className="label">Save 33%</p>
-              </div>
-              <p className="font-serif text-2xl">
-                $39.99 <span className="text-base font-sans text-slate-soft">/ year</span>
-              </p>
-              <ul className="text-sm text-slate space-y-1">
-                <li>· Everything in Premium</li>
-                <li>· $3.33/month equivalent, billed yearly</li>
-              </ul>
-              <a
-                href="https://app.pettranslator.ai/pricing"
-                className="text-terra text-sm font-medium hover:underline"
-              >
-                Go annual →
-              </a>
-            </div>
-          </div>
-
-          <p className="label mt-8 text-center">
-            Same AI on every plan · Free is rate-limited, not feature-limited · 7-day money-back guarantee
-          </p>
-        </div>
-
-        {/* Schema.org Offers — duplicates app/pricing for the marketing site */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              name: "PetTranslator.ai",
-              applicationCategory: "LifestyleApplication",
-              operatingSystem: "Web",
-              description:
-                "Behavioral analysis for dogs and cats from a single photo.",
-              url: "https://pettranslator.ai/",
-              offers: [
-                {
-                  "@type": "Offer",
-                  name: "Free",
-                  price: "0",
-                  priceCurrency: "USD",
-                  description: "3 behavioral analyses, lifetime.",
-                },
-                {
-                  "@type": "Offer",
-                  name: "Premium monthly",
-                  price: "4.99",
-                  priceCurrency: "USD",
-                  description: "30 analyses per month, full reports, PDF export, behavioral trends.",
-                },
-                {
-                  "@type": "Offer",
-                  name: "Premium annual",
-                  price: "39.99",
-                  priceCurrency: "USD",
-                  description: "30 analyses per month, billed annually — 33% discount.",
-                },
-              ],
-            }),
-          }}
-        />
-      </section>
+      {/* PRICING — moved to its own client component so the
+          monthly/annual toggle can run client-side without making the
+          whole homepage a client tree. The Schema.org Offer JSON-LD
+          that used to live here now lives on /pricing (canonical) so
+          Google doesn't see two competing SoftwareApplication graphs. */}
+      <HomePricing />
 
       {/* FAQ */}
       <section className="border-b border-rule">
