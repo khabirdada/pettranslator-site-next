@@ -1,8 +1,12 @@
 import Link from "next/link";
 
+// No mt-* on the footer below — its own border-t + internal py-12
+// already provide enough visual separation from the page above.
+// Previously mt-24 stacked on top of main's sm:py-20 bottom padding
+// to produce ~220px of dead space before the footer columns appeared.
 export function Footer() {
   return (
-    <footer className="border-t border-rule mt-24">
+    <footer className="border-t border-rule">
       <div className="mx-auto max-w-6xl px-6 py-12 grid sm:grid-cols-4 gap-8 text-sm">
         <div>
           <p className="font-serif text-lg mb-2">
