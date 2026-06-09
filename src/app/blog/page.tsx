@@ -88,8 +88,10 @@ export default function BlogHubPage() {
           article cites primary sources. No dominance theory.
         </p>
 
-        {/* Category nav strip */}
-        <nav className="flex flex-wrap gap-3 mb-12" aria-label="Categories">
+        {/* Category nav strip. Hairline below it makes it visually a
+            "browse-by-category" filter rather than letting it bleed into
+            the curated 'Foundation guides' section that follows. */}
+        <nav className="flex flex-wrap gap-3 pb-10 mb-16 border-b border-rule" aria-label="Categories">
           {categories.map((cat) => (
             <Link
               key={cat.slug}
@@ -101,12 +103,15 @@ export default function BlogHubPage() {
           ))}
         </nav>
 
-        {/* Pillars — top billing. h2 promotes section in document outline
-            for screen readers + search engines (was a styled <p> before). */}
+        {/* Pillars — top billing. The section now opens with a real
+            editorial heading (§ marker + serif title) instead of just an
+            uppercase mono label so the eye reads it as a section break,
+            not a sub-label of the filter pills above. */}
         {pillars.length > 0 && (
           <section className="mb-16">
-            <h2 className="label mb-5 font-mono normal-case tracking-wider text-slate-soft">
-              Foundation guides
+            <p className="label mb-2">§ Foundation guides</p>
+            <h2 className="font-serif text-2xl sm:text-3xl mb-8">
+              Start <em className="text-terra">here</em>.
             </h2>
             <div className="grid sm:grid-cols-3 gap-6">
               {pillars.map((post) => (
@@ -116,10 +121,16 @@ export default function BlogHubPage() {
           </section>
         )}
 
-        {/* All other articles */}
+        {/* All other articles — same heading treatment as the pillar
+            block above so the two sections feel like proper editorial
+            siblings, not pillars-with-a-footer. */}
         <section>
-          <h2 className="label mb-5 font-mono normal-case tracking-wider text-slate-soft">
-            All articles ({rest.length})
+          <p className="label mb-2">§ Library</p>
+          <h2 className="font-serif text-2xl sm:text-3xl mb-8">
+            Every <em className="text-terra">article</em>{" "}
+            <span className="text-slate-soft text-base font-mono align-middle">
+              ({rest.length})
+            </span>
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
             {rest.map((post) => (
