@@ -1,7 +1,7 @@
 ---
 title: "Do Pet Translator Apps Actually Work? A Behaviorist's Review"
 slug: "do-pet-translator-apps-work"
-description: "Most 'pet translator' apps simulate translation through entertainment rather than science. Here's why — and what an honest AI behavior tool can actually do."
+description: "Most 'pet translator' apps simulate translation through entertainment rather than science."
 category: "training-science"
 tags: ["training-science", "ai-and-pets", "behavioral-science"]
 author: "khabir-mughal"
@@ -68,7 +68,7 @@ For a more granular walkthrough of each of these, see [Dog Body Language: A Beha
 
 There's a defensible technical product in this space, and it isn't translation. It's behavioral observation from visible markers.
 
-The pipeline looks like this. The user uploads a clear photo or short video of their pet. A computer-vision model — image classification plus pose estimation, the same family of models used in clinical gait analysis and sports biomechanics — extracts a set of observable features: ear angle, eye openness, lip retraction, tail position, weight distribution, hackle state. Each feature is scored with a confidence value. A behavioral-interpretation layer then applies a published framework — Overall's clinical observation criteria, Rugaas's calming-signal taxonomy, the AVSAB-aligned positive-reinforcement framework — to translate the feature set into a probability distribution over internal states. Relaxed. Aroused. Stressed. Fearful. In conflict.
+The pipeline looks like this. The user uploads a clear photo or short video of their pet. A computer-vision model — image classification plus pose estimation, the same family of models used in clinical gait analysis and sports biomechanics — extracts a set of observable features: ear angle, eye openness, lip retraction, tail position, weight distribution, hackle state. Each feature is scored with a confidence value. A behavioral-interpretation layer then applies a published framework — Overall's clinical observation criteria, Rugaas's calming-signal taxonomy, the [AVSAB](https://avsab.org/)-aligned positive-reinforcement framework — to translate the feature set into a probability distribution over internal states. Relaxed. Aroused. Stressed. Fearful. In conflict.
 
 The output isn't "I'm hungry." The output is closer to "this dog is showing three displacement-stress markers at moderate intensity; recommend reducing the environmental trigger before continuing the interaction." That's not a sentence the dog is saying. That's an observation about what the dog's body is doing, framed in the same language a behaviorist would use in a consultation note.
 
@@ -89,7 +89,7 @@ Four questions separate the defensible products from the rest. Run any tool you'
 **4. Does it default to "consult a professional" for serious behaviors?** Aggression toward humans or other animals, severe separation distress, stereotypic behaviors, sudden personality change — none of these belong in an AI tool's recommendation surface. A defensible product routes serious behaviors to credentialed positive-reinforcement professionals (IAABC, CDBC, CSAT, Fear Free, KPA-CTP) rather than offering a fix in the chat. A tool that confidently prescribes a training plan for a biting dog is overreaching its scope.
 
 <Callout type="referral">
-The AVSAB and IAABC directories let you search for credentialed positive-reinforcement professionals by region. Any tool that doesn't route serious behavior questions to a directory like this is taking on liability it isn't qualified to hold.
+The AVSAB and [IAABC](https://iaabc.org/) directories let you search for credentialed positive-reinforcement professionals by region. Any tool that doesn't route serious behavior questions to a directory like this is taking on liability it isn't qualified to hold.
 </Callout>
 
 A bonus question, which most owners forget to ask: does the tool tell you when it doesn't know? A behaviorist will say "I can't read this dog from this angle, can you reposition the camera?" An entertainment-tier app will return a caption no matter what you upload — including photos of objects that aren't animals, which several reviewers in the category have demonstrated.

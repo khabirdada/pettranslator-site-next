@@ -72,7 +72,9 @@ export default async function AuthorPage({ params }: PageProps) {
             ))}
         </div>
 
-        <p className="label mb-5">{posts.length} {posts.length === 1 ? "article" : "articles"}</p>
+        <h2 className="label mb-5 font-mono normal-case tracking-wider text-slate-soft">
+          {posts.length} {posts.length === 1 ? "article" : "articles"} by {author.name}
+        </h2>
         <ul className="border-t border-rule">
           {posts.map((post) => (
             <li key={post.slug} className="border-b border-rule">
