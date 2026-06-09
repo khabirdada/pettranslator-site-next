@@ -8,7 +8,10 @@ import {
 } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Blog — Pet Behavior, Body Language, and Training Science",
+  // Base title is ≤41 chars so the layout's ` | PetTranslator.ai`
+  // suffix (19c) keeps the rendered SERP title under Google's
+  // ~60c truncation threshold.
+  title: "Blog — Behavior, Body Language, Training",
   description:
     "Behaviorist-grade guides to dog and cat body language, stress signals, training science, and the real meanings behind your pet's behavior. AVSAB-aligned, force-free.",
   alternates: { canonical: "/blog" },

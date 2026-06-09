@@ -7,7 +7,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pricing — Free + Premium for Dog and Cat Behavioral Analysis",
+  // Base title trimmed to ≤41c so rendered SERP title stays ≤60c.
+  title: "Pricing — Free + Premium Pet Analysis",
   description:
     "Three behavioral analyses free, lifetime. Premium at $4.99/mo or $39.99/yr (33% discount) for 30 analyses per month. Cancel anytime. 7-day refund window.",
   alternates: { canonical: "/pricing" },

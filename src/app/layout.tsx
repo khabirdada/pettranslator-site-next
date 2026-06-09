@@ -24,8 +24,9 @@ export const metadata: Metadata = {
     default: "PetTranslator.ai — Understand your pet, scientifically",
     template: "%s | PetTranslator.ai",
   },
+  // Kept ≤155 chars so Google doesn't truncate mid-sentence in SERP.
   description:
-    "Premium AI behavioral analysis for dog and cat owners. Upload a photo, get a vet-behaviorist-style report — observed markers, behavioral state, owner action plan. AVSAB-aligned, force-free.",
+    "AI behavioral analysis for dog and cat owners. Upload one photo — get observed markers, behavioral state, and an action plan. AVSAB-aligned.",
   openGraph: {
     title: "PetTranslator.ai — Understand your pet, scientifically",
     description:
