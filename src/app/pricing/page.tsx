@@ -1,25 +1,26 @@
-// Marketing-side pricing page. Routes the actual checkout to the app
-// subdomain (where PayPal Subscriptions + the in-app /pricing page with
-// the annual toggle already live). This page exists to rank for
-// "pet behavior analysis pricing" queries and to communicate the offer
-// before signup — not to take payment.
+// Marketing-side pricing page. The actual checkout flow lives on the
+// app subdomain (Stripe-powered). This page exists to rank for "pet
+// behavior analysis pricing" queries, communicate the offer pre-signup,
+// and feed AI search engines (ChatGPT/Perplexity/AI Overviews) the
+// structured Offer + FAQ data they need to cite specific prices.
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   // Base title trimmed to ≤41c so rendered SERP title stays ≤60c.
-  title: "Pricing — Free + Premium Pet Analysis",
+  title: "Pricing — Free, Premium, Pro",
   description:
-    "Three behavioral analyses free, lifetime. Premium at $4.99/mo or $39.99/yr (33% discount) for 30 analyses per month. Cancel anytime. 7-day refund window.",
+    "3 free behavioral analyses, lifetime. Premium $4.99/mo or $39.99/yr — 30 analyses/mo. Pro $9.99/mo — 75 analyses/mo, 15 pet profiles, vet-PDF.",
   alternates: { canonical: "/pricing" },
 };
 
 const ORG_ID = "https://pettranslator.ai/#organization";
 const APP_ID = "https://pettranslator.ai/#software";
 
-// Offer + SoftwareApplication schema. Google uses this for the
-// "Pricing" rich snippet under Sitelinks Search Results, and AI search
-// engines cite it when answering "how much does PetTranslator cost".
+// SoftwareApplication + 4 Offers + FAQPage + BreadcrumbList.
+// Pro added as a 4th Offer (the existing 3 are Free + Premium monthly +
+// Premium annual). All AI search engines + Google rich snippets pick
+// this up directly.
 const pricingSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -70,6 +71,21 @@ const pricingSchema = {
           availability: "https://schema.org/InStock",
           url: "https://app.pettranslator.ai/pricing",
         },
+        {
+          "@type": "Offer",
+          name: "Pro — Monthly",
+          price: "9.99",
+          priceCurrency: "USD",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: "9.99",
+            priceCurrency: "USD",
+            billingDuration: "P1M",
+            referenceQuantity: { "@type": "QuantitativeValue", value: 75, unitText: "analyses" },
+          },
+          availability: "https://schema.org/InStock",
+          url: "https://app.pettranslator.ai/pricing",
+        },
       ],
       publisher: { "@id": ORG_ID },
     },
@@ -85,18 +101,26 @@ const pricingSchema = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "How does PetTranslator's free tier work?",
+          name: "What's the difference between Premium and Pro?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "You get 3 full behavioral analyses, lifetime — not daily or monthly. No credit card, no signup required to try. The free analyses use the same AI reasoning as Premium; they're rate-limited, not feature-limited.",
+            text: "Premium ($4.99/mo or $39.99/yr) covers 30 behavioral analyses per month across up to 5 pet profiles. Pro ($9.99/mo) covers 75 analyses per month across up to 15 pet profiles, plus vet-ready PDF exports and a priority analysis queue. Pro is built for breeders, multi-pet households, fosters, and shelter volunteers.",
           },
         },
         {
           "@type": "Question",
-          name: "Can I cancel my Premium subscription anytime?",
+          name: "How does PetTranslator's free tier work?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. One click in your account settings cancels your subscription. You keep access through the end of the billing period you've already paid for. No questions asked, no exit interview.",
+            text: "You get 3 full behavioral analyses, lifetime — not daily or monthly. No credit card, no signup required to try. The free analyses use the same AI reasoning as Premium and Pro; the tiers differ in volume, not in quality.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can I cancel my subscription anytime?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. One click in your account settings cancels your subscription. You keep access through the end of the billing period you've already paid for. No questions asked.",
           },
         },
         {
@@ -104,7 +128,7 @@ const pricingSchema = {
           name: "Is there a refund if I'm not satisfied?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes — within 7 days of your first charge, email refund@pettranslator.ai and we'll refund in full. No need to justify it.",
+            text: "Yes — within 7 days of your first charge, email refund@pettranslator.ai and we'll refund in full. Applies to Premium and Pro.",
           },
         },
         {
@@ -112,23 +136,15 @@ const pricingSchema = {
           name: "Is my pet's photo used to train AI models?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "No. PetTranslator runs on Anthropic's API under enterprise privacy terms — your uploads are never used to train AI models. They're processed for analysis only and deleted from rolling logs.",
+            text: "No. PetTranslator runs on Anthropic's API under enterprise privacy terms — your uploads are never used to train AI models.",
           },
         },
         {
           "@type": "Question",
-          name: "Does the Premium plan include vet-ready exports?",
+          name: "Can I upgrade or downgrade between Premium and Pro?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes. Premium reports can be exported as PDF and brought to your veterinarian or behaviorist consultation. PetTranslator is not a diagnostic tool — it's a behavioral observation aid that can support a real clinical visit.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "How many pets can I track on Premium?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Up to 5 distinct pet profiles per Premium subscription. Each pet has its own analysis history and behavioral trends.",
+            text: "Yes. Changes take effect on the next billing cycle. Upgrading from Premium to Pro gives you the higher analysis count immediately; downgrading from Pro to Premium happens at the end of your current paid period.",
           },
         },
       ],
@@ -145,7 +161,7 @@ export default function PricingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pricingSchema) }}
       />
 
-      <main className="mx-auto max-w-5xl px-6 py-12 sm:py-20">
+      <main className="mx-auto max-w-6xl px-6 py-12 sm:py-20">
         <nav className="label mb-4 flex gap-2 text-slate-soft" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-terra">Home</Link>
           <span>/</span>
@@ -157,24 +173,27 @@ export default function PricingPage() {
           Read your pet, <em className="text-terra">properly</em>.
         </h1>
         <p className="text-slate text-lg max-w-prose mb-12">
-          Start free — 3 behavioral analyses with no signup required. Upgrade when
-          you want consistent insight across multiple pets and multiple moments.
+          Start free — 3 analyses with no signup. Upgrade to Premium for monthly
+          consistency, or Pro for power-user volume across the whole household.
         </p>
 
-        <div className="grid sm:grid-cols-2 gap-6 mb-12">
+        <div className="grid sm:grid-cols-3 gap-6 mb-12">
+          {/* FREE */}
           <div className="border border-rule rounded-3xl p-7 bg-paper-light flex flex-col">
-            <h2 className="label mb-3 font-mono normal-case tracking-wider text-slate-soft">Free</h2>
+            <h2 className="label mb-3 font-mono normal-case tracking-wider text-slate-soft">
+              Free
+            </h2>
             <div className="mb-6">
               <span className="font-serif text-4xl">$0</span>
               <span className="text-slate text-sm font-mono ml-1">/ forever</span>
             </div>
             <ul className="space-y-3 text-sm mb-8 flex-1">
               {[
-                "3 behavioral analyses (lifetime, not daily)",
-                "Single pet profile",
+                "3 behavioral analyses (lifetime)",
+                "1 pet profile",
                 "Full biometric markers report",
                 "30-day result history",
-                "Same AI model as Premium",
+                "Same AI model as paid tiers",
               ].map((feat) => (
                 <li key={feat} className="flex items-start gap-2.5">
                   <span className="text-terra font-mono text-xs mt-1">✓</span>
@@ -190,6 +209,7 @@ export default function PricingPage() {
             </a>
           </div>
 
+          {/* PREMIUM — recommended */}
           <div className="border-2 border-terra rounded-3xl p-7 bg-paper-light flex flex-col relative">
             <span className="absolute -top-3 left-7 inline-flex items-center bg-terra text-paper-light text-xs font-mono uppercase tracking-wider px-3 py-1 rounded-full">
               Premium
@@ -208,9 +228,8 @@ export default function PricingPage() {
               {[
                 "30 behavioral analyses per month",
                 "Up to 5 pet profiles",
-                "Vet-ready PDF exports",
                 "Behavioral trends & journal",
-                "Priority analysis queue",
+                "30-day result history",
                 "Same AI model as Free",
               ].map((feat) => (
                 <li key={feat} className="flex items-start gap-2.5">
@@ -226,20 +245,54 @@ export default function PricingPage() {
               Get Premium →
             </a>
             <p className="label mt-3 text-xs text-slate-soft">
-              Checkout & billing managed on app.pettranslator.ai
+              Monthly or annual · cancel anytime
+            </p>
+          </div>
+
+          {/* PRO — power-user tier */}
+          <div className="border border-rule rounded-3xl p-7 bg-paper-light flex flex-col">
+            <h2 className="label mb-3 font-mono normal-case tracking-wider text-slate-soft">
+              Pro
+            </h2>
+            <div className="mb-2 flex items-baseline gap-1.5">
+              <span className="font-serif text-4xl">$9.99</span>
+              <span className="text-slate text-sm font-mono">/ month</span>
+            </div>
+            <p className="text-xs text-slate-soft font-mono mb-6">
+              For breeders, multi-pet homes, fosters
+            </p>
+            <ul className="space-y-3 text-sm mb-8 flex-1">
+              {[
+                "75 behavioral analyses per month",
+                "Up to 15 pet profiles",
+                "Everything in Premium",
+                "Priority analysis queue",
+                "Vet-ready PDF exports",
+              ].map((feat) => (
+                <li key={feat} className="flex items-start gap-2.5">
+                  <span className="text-terra font-mono text-xs mt-1">✓</span>
+                  <span className="text-ink">{feat}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="https://app.pettranslator.ai/pricing"
+              className="btn btn-light w-full justify-center"
+            >
+              Get Pro →
+            </a>
+            <p className="label mt-3 text-xs text-slate-soft">
+              Monthly billing · cancel anytime
             </p>
           </div>
         </div>
 
-        {/* The four-row "trust strip". Each row is a real, repeatable
-            commitment — these are also surfaced through FAQPage schema
-            so AI search engines (ChatGPT, Perplexity) can answer
-            objections directly from the page. */}
+        {/* The four-row trust strip — same FAQ surfaced via schema above */}
         <section className="border-t border-rule pt-8 grid sm:grid-cols-2 gap-x-8 gap-y-6 text-sm mb-16">
           <div>
             <h3 className="font-semibold mb-1">7-day refund window</h3>
             <p className="text-slate leading-relaxed">
-              Email <a className="text-terra hover:underline" href="mailto:refund@pettranslator.ai">refund@pettranslator.ai</a> within 7 days of your first charge for a full refund. No justification needed.
+              Email <a className="text-terra hover:underline" href="mailto:refund@pettranslator.ai">refund@pettranslator.ai</a> within 7 days of your first charge for a full refund.
             </p>
           </div>
           <div>
@@ -257,13 +310,12 @@ export default function PricingPage() {
           <div>
             <h3 className="font-semibold mb-1">Same AI on every tier</h3>
             <p className="text-slate leading-relaxed">
-              Free is rate-limited (3 lifetime), not feature-limited. The reasoning, the markers, the report format — identical to Premium.
+              Free, Premium, and Pro use the same Claude Sonnet 4.6 model and prompt. The tiers differ in volume — never in reasoning quality.
             </p>
           </div>
         </section>
 
-        {/* What's actually different — the comparison Google + AI search
-            engines want to surface. Direct, scannable, no fluff. */}
+        {/* COMPARISON TABLE */}
         <section className="border-t border-rule pt-8 mb-16">
           <h2 className="label mb-5 font-mono normal-case tracking-wider text-slate-soft">
             What's actually different
@@ -275,64 +327,34 @@ export default function PricingPage() {
                   <th className="py-3 font-medium text-slate">Capability</th>
                   <th className="py-3 font-medium text-slate">Free</th>
                   <th className="py-3 font-medium text-terra">Premium</th>
+                  <th className="py-3 font-medium text-ink">Pro</th>
                 </tr>
               </thead>
               <tbody className="text-slate">
                 {[
-                  ["Lifetime analyses", "3 total", "30 per month"],
-                  ["Pet profiles", "1", "Up to 5"],
-                  ["AI model", "Sonnet 4.6 multimodal", "Sonnet 4.6 multimodal"],
-                  ["Biometric markers report", "Full", "Full"],
-                  ["Owner action plan (Do/Avoid)", "Yes", "Yes"],
-                  ["Confidence calibration", "Yes", "Yes"],
-                  ["History retention", "30 days", "Unlimited"],
-                  ["Vet-ready PDF export", "—", "Yes"],
-                  ["Behavioral trends across uploads", "—", "Yes"],
-                  ["Priority queue", "—", "Yes"],
-                ].map(([label, free, prem]) => (
+                  ["Analyses", "3 lifetime", "30 / month", "75 / month"],
+                  ["Pet profiles", "1", "Up to 5", "Up to 15"],
+                  ["AI model", "Sonnet 4.6", "Sonnet 4.6", "Sonnet 4.6"],
+                  ["Biometric markers report", "Full", "Full", "Full"],
+                  ["Owner action plan (Do/Avoid)", "Yes", "Yes", "Yes"],
+                  ["Confidence calibration", "Yes", "Yes", "Yes"],
+                  ["History retention", "30 days", "Unlimited", "Unlimited"],
+                  ["Behavioral trends across uploads", "—", "Yes", "Yes"],
+                  ["Vet-ready PDF export", "—", "—", "Yes"],
+                  ["Priority analysis queue", "—", "—", "Yes"],
+                  ["Daily safety ceiling", "—", "10 / day", "25 / day"],
+                  ["Billing", "—", "Monthly or Annual", "Monthly"],
+                ].map(([label, free, prem, pro]) => (
                   <tr key={label} className="border-b border-rule/50">
                     <td className="py-3">{label}</td>
                     <td className="py-3">{free}</td>
-                    <td className="py-3 text-ink font-medium">{prem}</td>
+                    <td className="py-3 text-ink">{prem}</td>
+                    <td className="py-3 text-ink font-medium">{pro}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </section>
-
-        {/* FAQ — surfaced via FAQPage schema above. Answers are
-            self-contained so AI search engines can quote them
-            without crawling deeper. */}
-        <section className="border-t border-rule pt-8 mb-12">
-          <h2 className="label mb-5 font-mono normal-case tracking-wider text-slate-soft">
-            Common questions
-          </h2>
-          <dl className="space-y-6">
-            {[
-              {
-                q: "How does the free tier work?",
-                a: "Three behavioral analyses, lifetime. No credit card. The reasoning is identical to Premium — Free is rate-limited, not feature-limited.",
-              },
-              {
-                q: "Is my pet's photo used to train AI?",
-                a: "No. Anthropic enterprise terms apply. Uploads are processed for analysis only and never used to train models.",
-              },
-              {
-                q: "Can I export reports for my vet?",
-                a: "Yes, on Premium. PDF exports include observed markers, the behavioral interpretation, and the suggested action plan in a format you can email to your vet or behaviorist.",
-              },
-              {
-                q: "Is this a replacement for a behaviorist?",
-                a: "No. PetTranslator is a behavioral observation aid — not a diagnostic or treatment tool. If the AI sees signs of pain, illness, or escalating distress, it flags them and recommends a real professional.",
-              },
-            ].map(({ q, a }) => (
-              <div key={q} className="border-b border-rule pb-5">
-                <dt className="font-serif text-lg mb-2">{q}</dt>
-                <dd className="text-slate leading-relaxed">{a}</dd>
-              </div>
-            ))}
-          </dl>
         </section>
 
         <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-slate-soft font-mono">

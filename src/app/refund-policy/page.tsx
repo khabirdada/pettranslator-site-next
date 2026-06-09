@@ -68,7 +68,12 @@ export default function RefundPolicyPage() {
 
         <h2>Annual subscriptions</h2>
         <p>
-          The 7-day window applies to annual plans too — if you cancel within 7 days of your annual charge, you get the full $39.99 back. After 7 days, annual is non-refundable, but you can still cancel auto-renewal and keep access through your paid period.
+          The 7-day window applies to annual plans too — if you cancel Premium annual within 7 days of your charge, you get the full $39.99 back. After 7 days, annual is non-refundable, but you can still cancel auto-renewal and keep access through your paid period.
+        </p>
+
+        <h2>Pro plan</h2>
+        <p>
+          The 7-day refund window applies to Pro ($9.99/mo) on the same terms as Premium. Pro is monthly-only — there's no annual variant to refund. After 7 days, the current month is non-refundable but you can cancel auto-renewal anytime.
         </p>
 
         <h2>Disputes</h2>
