@@ -39,15 +39,41 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // we always defer to the auto-injected one. The heroImageExists()
   // helper used to gate this is now only used for the in-article
   // <img> render below.
+  // Trim the social-card description to 125 chars. Why this threshold:
+  //   - Discord, Slack, Messages truncate previews at ~125 on mobile —
+  //     anything longer shows visible "…" truncation that looks like
+  //     content was lost mid-thought.
+  //   - Twitter shows ~200, Facebook ~300, Google snippet ~155 — all
+  //     comfortably above 125 so we don't waste space there either.
+  //   - Going below 120 would leave us showing fragments instead of
+  //     complete thoughts. 125 is the sweet spot.
+  //
+  // The full post.description still goes in <meta name="description">
+  // for SEO so Google's SERP sees the long form.
+  const OG_DESC_MAX = 125;
+  const ogDescription =
+    post.description.length > OG_DESC_MAX
+      ? post.description
+          .slice(0, OG_DESC_MAX - 1)
+          .replace(/[\s,;:.!?\-—–]+$/, "")
+        + "…"
+      : post.description;
+
   return {
     title: post.title,
     description: post.description,
     alternates: { canonical: url },
     openGraph: {
       title: post.title,
-      description: post.description,
+      description: ogDescription,
       url,
       type: "article",
+      // siteName must be redeclared on every page that defines its own
+      // openGraph — Next.js metadata replaces the parent openGraph
+      // object wholesale rather than deep-merging, so the root layout's
+      // siteName wouldn't show on article pages without this line.
+      // Discord uses og:site_name as the bold header above the card.
+      siteName: "PetTranslator.ai",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       // Use the author's human-readable name (not the slug) so AI search
@@ -57,7 +83,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       // Intentionally no images[] — let the file-based opengraph-image
       // convention populate it. Twitter card pulls from the same source.
     },
-    twitter: { card: "summary_large_image" },
+    twitter: { card: "summary_large_image", description: ogDescription },
   };
 }
 

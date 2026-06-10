@@ -1,0 +1,19 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "_comment": "Force Content-Type: image/png on extensionless opengraph-image files. Next.js with output:'export' generates the per-article OG images at /blog/<slug>/opengraph-image (no extension), and Vercel's static MIME guesser falls back to application/octet-stream — which Twitter, Facebook, LinkedIn, and Discord all reject as invalid. Without this header, every per-article OG card silently breaks on share. The headers config applies on top of the static export.",
+  "headers": [
+    {
+      "source": "/blog/(.*)/opengraph-image",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/png"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
