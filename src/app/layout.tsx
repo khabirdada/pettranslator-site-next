@@ -100,8 +100,22 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {/* Sitewide Schema.org graph — Organization, WebSite. SoftwareApplication
-            + Offers schema lives on /pricing because it's offer-specific. */}
+        {/* Sitewide Schema.org graph — Organization + WebSite + WebApplication.
+            Three entities, cross-referenced via @id, in one JSON-LD block.
+            Google prefers a single @graph over multiple <script> blocks.
+
+            The WebApplication node carries the Wikidata anchor
+            (Q140167480 for PetTranslator.ai, Q140157373 for the founder).
+            That anchor is what lets Google Knowledge Graph, ChatGPT,
+            Claude, Perplexity, and Gemini resolve the brand name to a
+            structured entity instead of treating it as ambiguous text —
+            the strongest E-E-A-T signal we can ship without a Wikipedia
+            article.
+
+            SoftwareApplication + Offers schema still lives on /pricing
+            because it's offer-specific (price, currency, availability).
+            The WebApplication node here is the *identity* layer; the
+            /pricing node is the *commerce* layer. They coexist. */}
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
@@ -118,6 +132,7 @@ export default function RootLayout({
                   email: "hello@pettranslator.ai",
                   description:
                     "Premium AI-powered behavioral analysis for dog and cat owners.",
+                  founder: { "@id": "https://journal.elelaf.com/about/#reviewer-person" },
                 },
                 {
                   "@type": "WebSite",
@@ -126,6 +141,26 @@ export default function RootLayout({
                   name: "PetTranslator.ai",
                   publisher: { "@id": "https://pettranslator.ai/#organization" },
                   inLanguage: "en-US",
+                },
+                {
+                  "@type": "WebApplication",
+                  "@id": "https://pettranslator.ai/#application",
+                  name: "PetTranslator.ai",
+                  url: "https://pettranslator.ai/",
+                  description:
+                    "AI behavioral analysis for dog and cat owners. Upload one photo — get observed markers, behavioral state, and an action plan. AVSAB-aligned.",
+                  applicationCategory: "LifestyleApplication",
+                  operatingSystem: "All",
+                  foundingDate: "2026",
+                  creator: { "@id": "https://journal.elelaf.com/about/#reviewer-person" },
+                  sameAs: ["https://www.wikidata.org/wiki/Q140167480"],
+                },
+                {
+                  "@type": "Person",
+                  "@id": "https://journal.elelaf.com/about/#reviewer-person",
+                  name: "Khabir Uddin",
+                  url: "https://journal.elelaf.com/about/",
+                  sameAs: ["https://www.wikidata.org/wiki/Q140157373"],
                 },
               ],
             }),
