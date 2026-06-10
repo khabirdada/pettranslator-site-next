@@ -84,15 +84,19 @@ export default function RootLayout({
       className={`${newsreader.variable} ${jakarta.variable} ${jetbrainsMono.variable}`}
     >
       <head>
-        {/* Plausible analytics — privacy-friendly, cookieless, GDPR-clean.
-            Honors the privacy policy commitment ("no Google Analytics by
-            default"). One <script>, ~1 KB, defer-loaded so it doesn't
-            block render. Tracks page views + outbound link clicks +
-            file downloads via the data-* config below. */}
+        {/* Cloudflare Web Analytics — free forever, no cookies, no PII,
+            no Google. Privacy-policy-aligned ("no GA by default").
+            Single beacon (~7 KB defer-loaded). Tracks page views, unique
+            visitors, referrers, country, device — but NOT outbound link
+            clicks or file downloads (those are Plausible-only). For
+            launch-stage analytics this is enough; we can layer
+            event-level tracking later if needed.
+            One token for both pettranslator.ai + app.pettranslator.ai
+            so the same Cloudflare dashboard shows both subdomains. */}
         <script
           defer
-          data-domain="pettranslator.ai"
-          src="https://plausible.io/js/script.outbound-links.file-downloads.js"
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "4d51d6d7b6cd4407a557472f367fd630"}'
         />
       </head>
       <body>
