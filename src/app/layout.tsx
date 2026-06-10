@@ -83,6 +83,18 @@ export default function RootLayout({
       lang="en"
       className={`${newsreader.variable} ${jakarta.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        {/* Plausible analytics — privacy-friendly, cookieless, GDPR-clean.
+            Honors the privacy policy commitment ("no Google Analytics by
+            default"). One <script>, ~1 KB, defer-loaded so it doesn't
+            block render. Tracks page views + outbound link clicks +
+            file downloads via the data-* config below. */}
+        <script
+          defer
+          data-domain="pettranslator.ai"
+          src="https://plausible.io/js/script.outbound-links.file-downloads.js"
+        />
+      </head>
       <body>
         {/* Sitewide Schema.org graph — Organization, WebSite. SoftwareApplication
             + Offers schema lives on /pricing because it's offer-specific. */}
