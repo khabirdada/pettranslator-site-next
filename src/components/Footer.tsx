@@ -48,6 +48,65 @@ export function Footer() {
           </ul>
         </div>
       </div>
+      {/* Social row — hairline-bordered band above the copyright. Mono
+          labels in slate, hover terra. Order: highest-discovery-value
+          first (X for share-of-voice, Pinterest for visual-search SEO,
+          then long-form on Substack/Quora, community on Reddit, paid
+          social on Facebook). The href list also feeds the JSON-LD
+          sameAs in app/layout.tsx so the entity graph stays in sync. */}
+      <div className="border-t border-rule">
+        <div className="mx-auto max-w-6xl px-6 py-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono text-slate-soft">
+          <span className="uppercase tracking-[0.12em]">Follow</span>
+          <a
+            href="https://x.com/Petranslatorai"
+            target="_blank"
+            rel="me noopener"
+            className="hover:text-terra"
+          >
+            X / Twitter
+          </a>
+          <a
+            href="https://www.pinterest.com/pettranslatorai/"
+            target="_blank"
+            rel="me noopener"
+            className="hover:text-terra"
+          >
+            Pinterest
+          </a>
+          <a
+            href="https://pettranslatorai.substack.com/"
+            target="_blank"
+            rel="me noopener"
+            className="hover:text-terra"
+          >
+            Substack
+          </a>
+          <a
+            href="https://www.quora.com/profile/Pet-Translator-Ai"
+            target="_blank"
+            rel="me noopener"
+            className="hover:text-terra"
+          >
+            Quora
+          </a>
+          <a
+            href="https://www.reddit.com/user/Vegetable-Sherbet-14/"
+            target="_blank"
+            rel="me noopener"
+            className="hover:text-terra"
+          >
+            Reddit
+          </a>
+          <a
+            href="https://www.facebook.com/Pettranslatorai/"
+            target="_blank"
+            rel="me noopener"
+            className="hover:text-terra"
+          >
+            Facebook
+          </a>
+        </div>
+      </div>
       <div className="border-t border-rule">
         <div className="mx-auto max-w-6xl px-6 py-4 text-xs font-mono text-slate-soft flex flex-wrap justify-between gap-2">
           <p>© {new Date().getFullYear()} PetTranslator.ai</p>

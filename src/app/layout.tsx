@@ -153,7 +153,20 @@ export default function RootLayout({
                   operatingSystem: "All",
                   foundingDate: "2026",
                   creator: { "@id": "https://journal.elelaf.com/about/#reviewer-person" },
-                  sameAs: ["https://www.wikidata.org/wiki/Q140167480"],
+                  // sameAs: Wikidata anchor + every owned social profile.
+                  // Google Knowledge Graph reads this graph to merge the
+                  // brand entity — each platform's profile cross-confirms
+                  // the others. Ordering: Wikidata first (canonical),
+                  // then social by audience size.
+                  sameAs: [
+                    "https://www.wikidata.org/wiki/Q140167480",
+                    "https://x.com/Petranslatorai",
+                    "https://www.facebook.com/Pettranslatorai/",
+                    "https://www.pinterest.com/pettranslatorai/",
+                    "https://pettranslatorai.substack.com/",
+                    "https://www.quora.com/profile/Pet-Translator-Ai",
+                    "https://www.reddit.com/user/Vegetable-Sherbet-14/",
+                  ],
                 },
                 {
                   "@type": "Person",
