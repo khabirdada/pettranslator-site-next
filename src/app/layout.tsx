@@ -153,6 +153,20 @@ export default function RootLayout({
                   operatingSystem: "All",
                   foundingDate: "2026",
                   creator: { "@id": "https://journal.elelaf.com/about/#reviewer-person" },
+                  // Compact AggregateOffer summarizing the 3 tiers at the
+                  // identity layer. Detailed per-tier Offer schema lives
+                  // on /pricing where it belongs commercially. The layout
+                  // version unlocks pricing-snippet rich results across
+                  // every page that mounts this graph.
+                  offers: {
+                    "@type": "AggregateOffer",
+                    priceCurrency: "USD",
+                    lowPrice: "0",
+                    highPrice: "9.99",
+                    offerCount: "3",
+                    availability: "https://schema.org/InStock",
+                    url: "https://pettranslator.ai/pricing",
+                  },
                   // sameAs: Wikidata anchor + every owned social profile.
                   // Google Knowledge Graph reads this graph to merge the
                   // brand entity — each platform's profile cross-confirms
