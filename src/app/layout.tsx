@@ -43,7 +43,12 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://pettranslator.ai"),
   title: {
-    default: "PetTranslator.ai — Understand your pet, scientifically",
+    // Default homepage title — bumped to ~62 chars so it lands inside
+    // the 55–65 SERP-display sweet spot. Was 54 chars, which Bing
+    // Webmaster flagged as "too short" because below ~55 leaves SERP
+    // real estate unused. Includes the audience phrase ("dog and cat
+    // owners") so the title alone qualifies the click intent.
+    default: "PetTranslator.ai — Behavioral analysis for dog and cat owners",
     template: "%s | PetTranslator.ai",
   },
   // Kept ≤155 chars so Google doesn't truncate mid-sentence in SERP.

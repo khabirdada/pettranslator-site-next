@@ -7,8 +7,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  // Base title trimmed to ≤41c so rendered SERP title stays ≤60c.
-  title: "Pricing — Free, Premium, Pro",
+  // Extended from "Pricing — Free, Premium, Pro" (46-char SERP title)
+  // to a 44-char base that becomes ~63 chars after the template suffix
+  // — moves into the 55–65 sweet spot Bing flagged. Adds the product
+  // category ("AI behavioral analysis") so SERP listing qualifies
+  // intent without needing to click.
+  title: "Pricing — 3 plans for AI behavioral analysis",
   description:
     "3 free analyses. Premium $4.99/mo or $39.99/yr — 30/mo. Pro $9.99/mo or $79.99/yr — 75/mo, 15 pets, vet PDF, priority queue.",
   alternates: { canonical: "/pricing" },

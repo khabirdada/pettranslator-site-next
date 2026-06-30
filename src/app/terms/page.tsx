@@ -5,7 +5,11 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service",
+  // Extended from "Terms of Service" (35-char SERP title) to 47-char
+  // base. After the layout template appends "| PetTranslator.ai" the
+  // final rendered title lands at 66 chars — at the edge of the SERP
+  // sweet spot but still well within Bing/Google's visible window.
+  title: "Terms of Service — Rules for using the platform",
   description:
     "PetTranslator.ai terms of service — the rules of the road for using our AI-powered pet behavioral analysis platform.",
   alternates: { canonical: "/terms" },

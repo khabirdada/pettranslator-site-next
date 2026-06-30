@@ -4,7 +4,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
+  // Extended from "Privacy Policy" (33-char SERP title) to 44-char base
+  // so the final rendered title lands at ~63 chars after the layout
+  // template appends "| PetTranslator.ai". Inside Bing/Google's 55–65
+  // SERP-display sweet spot. The qualifier ("Your pet photos, your data")
+  // also doubles as a click-intent signal — the user understands what
+  // the page covers without needing to click.
+  title: "Privacy Policy — Your pet photos, your data",
   description:
     "PetTranslator.ai privacy policy — what we collect, how we store it, what we never do with your pet photos. Anthropic enterprise terms apply.",
   alternates: { canonical: "/privacy" },
