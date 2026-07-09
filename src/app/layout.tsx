@@ -76,6 +76,17 @@ export const metadata: Metadata = {
     apple: "/assets/apple-touch-icon.png",
   },
   manifest: "/manifest.json",
+  // Search-engine ownership verifications. Emitted on every page so
+  // Bing's crawler can confirm domain ownership regardless of which
+  // route it hits first. Next.js renders verification.other as
+  // <meta name="<key>" content="<value>"> — matches Bing's spec
+  // (msvalidate.01) exactly. Add Google, Yandex, etc. to this object
+  // as they're issued.
+  verification: {
+    other: {
+      "msvalidate.01": "95423789E7D9A15323FEBDD470C2A2CF",
+    },
+  },
 };
 
 export default function RootLayout({
