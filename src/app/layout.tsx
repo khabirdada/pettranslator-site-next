@@ -179,6 +179,7 @@ export default function RootLayout({
                   // then social by audience size.
                   sameAs: [
                     "https://www.wikidata.org/wiki/Q140167480",
+                    "https://www.linkedin.com/company/pettranslator-ai",
                     "https://x.com/Petranslatorai",
                     "https://www.facebook.com/Pettranslatorai/",
                     "https://www.pinterest.com/pettranslatorai/",

@@ -58,6 +58,14 @@ export function Footer() {
         <div className="mx-auto max-w-6xl px-6 py-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-mono text-slate-soft">
           <span className="uppercase tracking-[0.12em]">Follow</span>
           <a
+            href="https://www.linkedin.com/company/pettranslator-ai"
+            target="_blank"
+            rel="me noopener"
+            className="hover:text-terra"
+          >
+            LinkedIn
+          </a>
+          <a
             href="https://x.com/Petranslatorai"
             target="_blank"
             rel="me noopener"
