@@ -190,13 +190,29 @@ export function getAllTagCounts(): Record<string, number> {
 }
 
 /**
- * Returns tags that meet the publish threshold (≥ TAG_THRESHOLD articles).
- * These are the only ones that get tag pages + sitemap entries.
+ * Returns tags that meet BOTH publish gates:
+ *   1. Article count ≥ TAG_THRESHOLD (thin-content protection)
+ *   2. A tag-metadata file exists at src/content/tags/<slug>.mdx
+ *
+ * Both are required because the tag route (getTag) also requires both.
+ * If the sitemap advertised a slug that met (1) but not (2), Google
+ * would crawl the URL and hit a 404 — which we discovered on 2026-07-25
+ * with `behavior-questions` (23 articles, no metadata file). Advertising
+ * 404s wrecks crawl-budget for a new domain, so the sitemap has to
+ * agree with the router by construction.
+ *
+ * If a tag hits the article threshold but hasn't gotten a metadata
+ * file yet, it's silently excluded from the sitemap — better than
+ * shipping a 404. Add the tag file to make it public.
  */
 export function getPublishedTagSlugs(): string[] {
   const counts = getAllTagCounts();
   return Object.entries(counts)
-    .filter(([, count]) => count >= TAG_THRESHOLD)
+    .filter(([slug, count]) => {
+      if (count < TAG_THRESHOLD) return false;
+      const filepath = path.join(TAGS_DIR, `${slug}.mdx`);
+      return fs.existsSync(filepath);
+    })
     .map(([slug]) => slug);
 }
 
