@@ -53,11 +53,11 @@ export const metadata: Metadata = {
   },
   // Kept ≤155 chars so Google doesn't truncate mid-sentence in SERP.
   description:
-    "AI behavioral analysis for dog and cat owners. Upload one photo — get observed markers, behavioral state, and an action plan. AVSAB-aligned.",
+    "AI behavioral analysis for dog and cat owners. Upload a photo or short video to get observed markers, behavioral context, and an action plan.",
   openGraph: {
     title: "PetTranslator.ai — Understand your pet, scientifically",
     description:
-      "Premium AI behavioral analysis for dog and cat owners. Vet-behaviorist-grade reports from a single photo.",
+      "Structured AI behavioral-observation reports for dog and cat owners from a photo or short video.",
     url: "https://pettranslator.ai",
     siteName: "PetTranslator.ai",
     images: [{ url: "/og.png", width: 1200, height: 630 }],
@@ -164,7 +164,7 @@ export default function RootLayout({
                   name: "PetTranslator.ai",
                   url: "https://pettranslator.ai/",
                   description:
-                    "AI behavioral analysis for dog and cat owners. Upload one photo — get observed markers, behavioral state, and an action plan. AVSAB-aligned.",
+                    "AI behavioral analysis for dog and cat owners. Upload a photo or short video to get observed markers, behavioral context, and an action plan.",
                   applicationCategory: "LifestyleApplication",
                   operatingSystem: "All",
                   foundingDate: "2026",

@@ -1,6 +1,6 @@
 # PetTranslator.ai
 
-> Premium AI-powered behavioral analysis for dog and cat owners. Upload one photo, get a vet-behaviorist-style report — observed body-language markers, the behavioral state they suggest, an owner action plan you can apply today. AVSAB-aligned, force-free training only, no dominance theory.
+> AI-powered behavioral observation for dog and cat owners. Upload a photo or short video to receive observed body-language markers, the behavioral context they may suggest, and an owner action plan. AVSAB-aligned, force-free guidance only, with no dominance theory.
 
 ## What this site is
 
