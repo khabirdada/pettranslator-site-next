@@ -38,7 +38,7 @@ export default function HomePage() {
               <span className="text-terra">trying to say.</span>
             </h1>
             <p className="text-slate text-lg leading-relaxed max-w-prose mb-8">
-              Upload one photo. A multimodal AI documents body language, vocal context, and posture the way a <em>board-certified behaviorist</em> would — then translates it into plain English with an owner action plan you can use today.
+              Upload a photo or short video. A multimodal AI documents visible body-language markers, weighs the context you provide, and turns them into a plain-English observation report with an owner action plan.
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <a
@@ -72,7 +72,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-2xl px-6 py-10 sm:py-12">
           <p className="label mb-4">§ 01 · The premise</p>
           <p className="font-serif text-2xl sm:text-3xl leading-snug text-ink">
-            Most "pet translator" apps are entertainment products — cartoon translations that monetize through weekly-trial rugpulls. We built the opposite: a clinical instrument that <em className="text-terra">documents what it sees</em> in your pet's body language, weighs the context you provide, and returns the kind of analysis a board-certified behaviorist would write in a session note.
+            Most "pet translator" apps are entertainment products — cartoon translations that monetize through weekly-trial rugpulls. We built the opposite: a behavioral-observation tool that <em className="text-terra">documents what it sees</em> in your pet's body language, weighs the context you provide, and clearly separates observation from interpretation.
           </p>
           <p className="label mt-6">— Khabir Mughal, founder · {new Date().getFullYear()}</p>
         </div>
@@ -247,7 +247,7 @@ export default function HomePage() {
                 a: "Dogs and cats are fully supported. Other companion animals (rabbits, birds, small mammals) follow — we want them right before we ship them.",
               },
               {
-                q: "How is my pet's video used?",
+                q: "How are my pet's photo or video used?",
                 a: "Processed by Anthropic Claude under enterprise privacy terms — your content is never used for AI model training. We do not sell, share, or publish your uploads. You can delete any analysis at any time.",
               },
               {
@@ -282,7 +282,7 @@ export default function HomePage() {
             Read your pet, <em className="text-terra">properly.</em>
           </h2>
           <p className="text-slate text-lg leading-relaxed max-w-prose mx-auto mb-8">
-            Upload one photo of your dog or cat. In about ten seconds, the AI returns a behaviorist-grade report — observed markers, behavioral interpretation, Do/Avoid action plan. Three free analyses to start, no signup, no card.
+            Upload a photo or short video of your dog or cat. In about ten seconds, the AI returns a structured observation report — visible markers, behavioral interpretation, and a Do/Avoid action plan. Three free analyses to start, no signup, no card.
           </p>
           <a
             href="https://app.pettranslator.ai/analyze"

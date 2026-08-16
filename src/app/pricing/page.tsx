@@ -36,7 +36,7 @@ const pricingSchema = {
       operatingSystem: "Web",
       url: "https://app.pettranslator.ai/",
       description:
-        "Multimodal AI behavioral analysis for dog and cat owners. Upload one photo, get a vet-behaviorist-style report — observed markers, behavioral state, owner action plan. AVSAB-aligned methodology.",
+        "Multimodal AI behavioral analysis for dog and cat owners. Upload a photo or short video for observed markers, behavioral context, and an owner action plan.",
       offers: [
         {
           "@type": "Offer",
