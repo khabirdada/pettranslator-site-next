@@ -61,6 +61,6 @@ One result blocked page retrieval. Its result metadata was retained, but no body
 ## Metadata plan
 
 - **Slug:** `cat-overstimulation-signs`
-- **Title:** `Cat Overstimulation Signs: Stop Before the Bite`
-- **Description:** `Tail flicks, skin ripples, ear changes and a quick look at your hand can signal cat overstimulation. Learn the warning sequence and how to respond safely.`
+- **Title:** `Cat Petting Aggression: Overstimulation Signs & Help`
+- **Description:** `Cat petting aggression can follow tail flicks, skin ripples, ear changes or pain. Learn the warning sequence and a safer choice-based petting method.`
 - **Hero concept:** Cat watching a paused hand on a sofa, showing subtle tension rather than aggression.
