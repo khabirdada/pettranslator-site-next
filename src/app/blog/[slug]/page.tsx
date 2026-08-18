@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import {
   getAllPosts,
   getPost,
@@ -259,7 +260,11 @@ export default async function ArticlePage({ params }: PageProps) {
             stripped body string. Custom components (Callout, TryItCTA)
             wired via the components prop. */}
         <article className="prose-editorial">
-          <MDXRemote source={body} components={mdxComponents} />
+          <MDXRemote
+            source={body}
+            components={mdxComponents}
+            options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+          />
         </article>
 
         {/* Tags */}

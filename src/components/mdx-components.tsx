@@ -4,6 +4,7 @@
 // (TryItCTA, Callout) used inside article MDX.
 
 import type { MDXComponents } from "mdx/types";
+import type { ComponentPropsWithoutRef } from "react";
 import Link from "next/link";
 import { TryItCTA } from "@/components/blog/TryItCTA";
 import { Callout } from "@/components/blog/Callout";
@@ -24,6 +25,16 @@ export const mdxComponents: MDXComponents = {
       </a>
     );
   },
+  table: ({ children, className, ...props }: ComponentPropsWithoutRef<"table">) => (
+    <div className="my-7 w-full overflow-x-auto rounded-xl border border-rule">
+      <table
+        className={`min-w-[42rem] w-full border-collapse text-left text-sm ${className ?? ""}`}
+        {...props}
+      >
+        {children}
+      </table>
+    </div>
+  ),
   TryItCTA,
   Callout,
 };
