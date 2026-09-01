@@ -5,7 +5,7 @@ import path from "node:path";
 const root = process.cwd();
 const addedToGit = execFileSync(
   "git",
-  ["diff", "HEAD", "--name-only", "--diff-filter=A"],
+  ["diff", "HEAD", "--name-only", "--diff-filter=AM"],
   { cwd: root, encoding: "utf8" },
 );
 const untracked = execFileSync(
@@ -93,4 +93,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`New-content check passed for ${added.length} added post(s).`);
+console.log(`Content check passed for ${added.length} added or modified post(s).`);

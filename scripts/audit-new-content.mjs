@@ -47,8 +47,25 @@ function imageDimensions(absolute) {
   return { width, height };
 }
 
-const added = addedPostPaths();
-const addedSlugs = new Set(added.map((file) => path.basename(file, ".mdx")));
+const requestedSlugs = process.argv.slice(2);
+const added = requestedSlugs.length
+  ? requestedSlugs.map((slug) => `src/content/posts/${slug}.mdx`)
+  : addedPostPaths();
+const newToGit = execFileSync(
+  "git",
+  ["diff", "HEAD", "--name-only", "--diff-filter=A"],
+  { cwd: root, encoding: "utf8" },
+);
+const untracked = execFileSync(
+  "git",
+  ["ls-files", "--others", "--exclude-standard"],
+  { cwd: root, encoding: "utf8" },
+);
+const addedSlugs = new Set(
+  [...new Set(`${newToGit}\n${untracked}`.trim().split("\n"))]
+    .filter((file) => file.startsWith("src/content/posts/") && file.endsWith(".mdx"))
+    .map((file) => path.basename(file, ".mdx")),
+);
 const allPostFiles = fs.readdirSync(postsRoot).filter((file) => file.endsWith(".mdx"));
 const allPostText = new Map(
   allPostFiles.map((file) => [file.replace(/\.mdx$/, ""), fs.readFileSync(path.join(postsRoot, file), "utf8")]),
@@ -79,7 +96,7 @@ for (const relative of added) {
   const words = prose ? prose.split(/\s+/).length : 0;
   if (words < 900) failures.push(`${slug}: article has only ${words} prose words`);
 
-  const internalSlugs = [...content.matchAll(/\]\(\/blog\/([^\)#?]+)[^\)]*\)/g)]
+  const internalSlugs = [...content.matchAll(/(?<!!)\[[^\]]+\]\(\/blog\/([^\)#?]+)[^\)]*\)/g)]
     .map((match) => match[1]);
   for (const target of new Set(internalSlugs)) {
     if (!allPostText.has(target)) failures.push(`${slug}: broken internal target /blog/${target}`);
@@ -115,4 +132,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Expanded content audit passed for ${added.length} post(s).`);
+console.log(`Expanded content audit passed for ${added.length} selected post(s).`);
