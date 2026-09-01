@@ -23,6 +23,7 @@ export interface PostMeta {
   slug: string;
   title: string;
   description: string;
+  tldr?: string;
   category: string;
   tags: string[];
   author: string;

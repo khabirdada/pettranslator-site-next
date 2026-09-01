@@ -10,6 +10,7 @@ import {
   getPostSlugs,
   getAuthor,
   getCategory,
+  heroCardSrc,
   heroImageExists,
 } from "@/lib/content";
 import { mdxComponents } from "@/components/mdx-components";
@@ -111,22 +112,14 @@ export default async function ArticlePage({ params }: PageProps) {
   const url = `https://pettranslator.ai/blog/${slug}`;
 
   const heroLive = heroImageExists(post.heroImage);
+  const heroCard = heroCardSrc(post.heroImage);
+  const heroSrcSet =
+    heroCard && heroCard !== post.heroImage
+      ? `${heroCard} 600w, ${post.heroImage} 1376w`
+      : undefined;
 
   return (
     <>
-      {/* LCP preload — pull the article hero down in parallel with the
-          HTML/CSS instead of waiting for body parsing. Shaves ~100–300ms
-          off Largest Contentful Paint when the hero is the LCP element. */}
-      {heroLive && (
-        <link
-          rel="preload"
-          as="image"
-          href={post.heroImage}
-          type="image/webp"
-          fetchPriority="high"
-        />
-      )}
-
       {/* Article + BreadcrumbList JSON-LD per page */}
       <script
         type="application/ld+json"
@@ -226,6 +219,8 @@ export default async function ArticlePage({ params }: PageProps) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={post.heroImage}
+                srcSet={heroSrcSet}
+                sizes="(max-width: 640px) 100vw, 768px"
                 alt={post.heroAlt}
                 width={1376}
                 height={768}
@@ -255,6 +250,13 @@ export default async function ArticlePage({ params }: PageProps) {
             <span>{post.readingTime} read</span>
           </div>
         </header>
+
+        {post.tldr && (
+          <aside className="mx-auto mb-10 max-w-[38rem] rounded-2xl border border-rule bg-paper-light px-5 py-4">
+            <p className="label mb-2 text-terra">TL;DR</p>
+            <p className="m-0 leading-relaxed text-ink">{post.tldr}</p>
+          </aside>
+        )}
 
         {/* The MDX body — compiled at build time from the gray-matter-
             stripped body string. Custom components (Callout, TryItCTA)

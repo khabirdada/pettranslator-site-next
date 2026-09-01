@@ -77,6 +77,17 @@ export const metadata: Metadata = {
     apple: "/assets/apple-touch-icon.png",
   },
   manifest: "/manifest.json",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   // Search-engine ownership verifications. Emitted on every page so
   // each crawler can confirm domain ownership regardless of which
   // route it hits first. Next.js renders `verification.google` as

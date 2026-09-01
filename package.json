@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "content:check": "node scripts/check-new-content.mjs",
+    "content:audit": "node scripts/audit-new-content.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
