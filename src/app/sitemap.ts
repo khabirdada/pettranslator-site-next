@@ -4,60 +4,88 @@ import {
   getAllCategories,
   getPublishedTagSlugs,
   getAuthorSlugs,
+  getPostsByAuthor,
+  getPostsByCategory,
+  getPostsByTag,
 } from "@/lib/content";
+import { STATIC_PAGE_LAST_MODIFIED } from "@/content/static-page-dates";
 
 // Force static generation — required because we use `output: "export"`.
 export const dynamic = "force-static";
 
 const BASE = "https://pettranslator.ai";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+type SitemapEntry = MetadataRoute.Sitemap[number];
 
-  // Static high-priority pages. Legal pages are low priority but
-  // must be present in the sitemap so Stripe/PayPal merchant review
-  // and Google's legal-doc-aware ranking signals find them.
+function validDate(value: string | undefined): Date | undefined {
+  if (!value) return undefined;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date;
+}
+
+function latestArticleDate(
+  posts: ReturnType<typeof getAllPosts>,
+): Date | undefined {
+  let latestTimestamp: number | undefined;
+
+  for (const post of posts) {
+    const date = validDate(post.updatedAt);
+    if (!date) continue;
+
+    const timestamp = date.getTime();
+    if (latestTimestamp === undefined || timestamp > latestTimestamp) {
+      latestTimestamp = timestamp;
+    }
+  }
+
+  return latestTimestamp === undefined ? undefined : new Date(latestTimestamp);
+}
+
+function sitemapEntry(url: string, lastModified?: string | Date): SitemapEntry {
+  return lastModified ? { url, lastModified } : { url };
+}
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const allPosts = getAllPosts();
+
+  // Dates for these pages are maintained when their editorial content changes.
+  // A deployment on its own must never update their sitemap timestamps.
   const staticPages: MetadataRoute.Sitemap = [
-    { url: `${BASE}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    { url: `${BASE}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${BASE}/blog`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
-    { url: `${BASE}/refund-policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${BASE}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${BASE}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    ...Object.entries(STATIC_PAGE_LAST_MODIFIED).map(([path, lastModified]) =>
+      sitemapEntry(`${BASE}${path}`, lastModified),
+    ),
+    sitemapEntry(`${BASE}/blog`, latestArticleDate(allPosts)),
   ];
 
   // Articles
-  const posts = getAllPosts().map((p) => ({
-    url: `${BASE}/blog/${p.slug}`,
-    lastModified: new Date(p.updatedAt),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
+  const posts = allPosts.map((post) =>
+    sitemapEntry(`${BASE}/blog/${post.slug}`, validDate(post.updatedAt)),
+  );
 
   // Categories
-  const categories = getAllCategories().map((c) => ({
-    url: `${BASE}/blog/category/${c.slug}`,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.6,
-  }));
+  const categories = getAllCategories().map((category) =>
+    sitemapEntry(
+      `${BASE}/blog/category/${category.slug}`,
+      latestArticleDate(getPostsByCategory(category.slug)),
+    ),
+  );
 
   // Tags — ONLY those that meet the publish threshold (≥4 articles).
   // Below-threshold tags exist in the DB but don't get sitemap entries.
-  const tags = getPublishedTagSlugs().map((slug) => ({
-    url: `${BASE}/blog/tag/${slug}`,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.5,
-  }));
+  const tags = getPublishedTagSlugs().map((slug) =>
+    sitemapEntry(
+      `${BASE}/blog/tag/${slug}`,
+      latestArticleDate(getPostsByTag(slug)),
+    ),
+  );
 
   // Authors
-  const authors = getAuthorSlugs().map((slug) => ({
-    url: `${BASE}/blog/author/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly" as const,
-    priority: 0.4,
-  }));
+  const authors = getAuthorSlugs().map((slug) =>
+    sitemapEntry(
+      `${BASE}/blog/author/${slug}`,
+      latestArticleDate(getPostsByAuthor(slug)),
+    ),
+  );
 
   return [...staticPages, ...posts, ...categories, ...tags, ...authors];
 }
