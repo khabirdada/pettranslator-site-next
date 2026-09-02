@@ -1,0 +1,57 @@
+competitor,source_path,exact_query,volume_us,kd,disposition,notes
+Dogster,/dog-behavior/,why does my dog sit alone in another room,170,23,published,Already published by PetTranslator
+Dogster,/dog-behavior/,do dogs fake injuries,320,22,published,Already published by PetTranslator
+Dogster,/dog-behavior/,licking belly button,880,26,net-new,Ambiguous wording; normalize only in editorial queue
+Dogster,/dog-behavior/,why do dogs eat tampons,210,10,defer,Unsafe ingestion and veterinary intent
+Dogster,/dog-behavior/,why do dogs urinate on other dogs,210,10,defer,Medical and elimination overlap
+Dogster,/dog-behavior/,dog hump toy,320,25,reserve,Check whether toy-specific intent warrants its own page
+Dogster,/dog-behavior/,why does my dog lick her pee off the floor,210,20,defer,Medical and hygiene risk
+Dogster,/dog-behavior/,dog licking belly button,320,15,net-new,Variant of belly-button licking intent
+Dogster,/dog-behavior/,dog licking urine,170,19,defer,Medical and hygiene risk
+Dogster,/dog-behavior/,why does my dog whimper in his sleep,480,16,refresh,Expand existing sleep-vocalization article
+Dogster,/dog-behavior/,why do dogs cross their paws,260,23,published,Already published by PetTranslator
+Dogster,/dog-behavior/,spilling food,210,24,reject,Ambiguous and mostly off-intent
+Dogster,/dog-behavior/,why do dogs lick pee,170,13,defer,Medical and hygiene risk
+Dogster,/dog-behavior/,why dogs lick my legs so much,210,21,reserve,Group with dog licking legs intent
+Dogster,/dog-behavior/,why do dogs lick their nose,720,23,refresh,Expand existing dog lip-licking article
+Dogster,/dog-behavior/,why dogs lick your legs,720,22,reserve,Group with dog licking legs intent
+Dogster,/dog-behavior/,why do dogs drink their pee,170,17,defer,Medical and hygiene risk
+Dogster,/dog-behavior/,do dogs drink their own urine,140,22,defer,Medical and hygiene risk
+Dogster,/dog-behavior/,dog hump toys,260,24,reserve,Variant of dog hump toy
+Dogster,/dog-behavior/,why does my dog lick my belly button,140,17,net-new,Exact natural variant of belly-button licking intent
+Dogster,/dog-behavior/,dog curled up sleeping,320,28,reserve,Potential sleeping-position cluster
+Dogster,/dog-behavior/,puppies eating their feces,1300,29,defer,Health-heavy and weak product fit
+Dogster,/dog-behavior/,why do dogs shake their toys,720,11,reserve,Useful behavior intent but live SERP is not weak
+Dogster,/dog-behavior/,puppy eating sticks,110,13,defer,Unsafe ingestion and veterinary intent
+Dogster,/dog-behavior/,why do dogs lick other dogs pee,260,18,defer,Medical and hygiene risk
+Dogster,/dog-behavior/,puppy grass eating,8100,29,defer,Health-heavy and weak product fit
+Dogster,/dog-behavior/,why does my dog put his paw on me,880,28,refresh,Check overlap with paw-lift and body-language pages
+Dogster,/dog-behavior/,rottie rumble,880,27,reject,Breed-specific and outside queue focus
+Dogster,/dog-behavior/,why do dogs whimper in their sleep,590,19,refresh,Variant of existing sleep-vocalization article
+Dogster,/dog-behavior/,why does my dog lick my legs,1000,24,reserve,Primary dog licking legs variant
+PetMD,/dog/behavior/,why do dogs eat poop,22200,21,defer,Health-heavy and weak product fit
+PetMD,/dog/behavior/,dog keeps licking lips,2900,27,refresh,Existing dog lip-licking article
+PetMD,/dog/behavior/,why do dogs roll in the grass,4400,13,reserve,Strong exact-intent publishers in current results
+PetMD,/dog/behavior/,do dogs laugh,1900,27,reserve,Strong exact-intent publishers in current results
+PetMD,/dog/behavior/,laughing at dogs,2900,27,reserve,Ambiguous variant of do dogs laugh
+PetMD,/dog/behavior/,why is my dog eating dirt,2400,24,defer,Medical triage and ingestion risk
+PetMD,/dog/behavior/,why do dogs smell your crotch,2400,28,reserve,Behavior fit; full SERP review pending
+PetMD,/dog/behavior/,why does my dog keep licking his lips,2400,29,refresh,Existing dog lip-licking article
+PetMD,/dog/behavior/,why do female dogs hump,2400,19,reserve,Group with general humping intent
+PetMD,/dog/behavior/,why do dogs hump,2400,25,reserve,General humping intent
+PetMD,/dog/behavior/,does dog laugh,2400,29,reserve,Variant of do dogs laugh
+PetMD,/dog/behavior/,why do dogs roll in poop,2900,23,reject,Previously rejected after live SERP review
+PetMD,/dog/behavior/,dog eating poop,5400,25,defer,Health-heavy and weak product fit
+PetMD,/cat/behavior/,why do cats lick you,12100,29,reserve,High demand but crowded exact-intent results likely
+PetMD,/cat/behavior/,why do cats pummel,12100,24,refresh,Variant of existing cat kneading article
+PetMD,/cat/behavior/,why do cats put their butt in your face,2400,27,reserve,Crowded with strong exact-intent pages
+PetMD,/cat/behavior/,why do cats put their bottoms in your face,1000,26,reserve,Variant of butt-in-face intent
+PetMD,/cat/behavior/,why do cats hiss,3600,24,reserve,Crowded with PetMD Purina Chewy and Cats.com
+PetMD,/cat/behavior/,why does my cat follow me everywhere,4400,29,reserve,Distinct from bathroom-only page; full brief pending
+PetMD,/cat/behavior/,what does it mean when a cat purrs,5400,24,reserve,Strong demand but competitive head term
+PetMD,/cat/behavior/,why is my cat pooping outside the litter box,2900,11,defer,Behavior-medical hybrid needing expert review
+PetMD,/cat/behavior/,cat pooping outside litter box,3600,28,defer,Variant of elimination intent
+PetMD,/cat/behavior/,why does my cat lick me so much,3600,29,reserve,Variant of cat licking people intent
+PetMD,/cat/behavior/,what does it mean when a cat wags its tail,3600,27,refresh,Existing cat tail meanings article
+PetMD,/cat/behavior/,how many hours a day do cats sleep,4400,25,reserve,Useful demand but weaker product fit
+PetMD,/cat/behavior/,are cats evil,3600,28,reject,Ambiguous anthropomorphic framing
